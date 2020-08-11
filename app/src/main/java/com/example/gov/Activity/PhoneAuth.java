@@ -53,6 +53,7 @@ public class PhoneAuth extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
         checkotp=findViewById(R.id.check);
+
         user= (user) intent.getSerializableExtra("values");
 
 

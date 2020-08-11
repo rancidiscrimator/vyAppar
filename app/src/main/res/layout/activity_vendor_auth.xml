@@ -114,6 +114,7 @@
         android:layout_height="match_parent"
         android:layout_margin="50dp"
         android:visibility="invisible"
+        android:clickable="false"
         android:id="@+id/cv"
         >
 

@@ -194,6 +194,7 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
             @Override
             public void onClick(View view) {
                 cv.setVisibility(View.VISIBLE);
+                cv.setClickable(true);
 
 
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -325,7 +326,7 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        
 
         if(cv.isClickable())
         {

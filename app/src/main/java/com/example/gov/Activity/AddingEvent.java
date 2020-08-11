@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.gov.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -80,74 +81,75 @@ public class AddingEvent extends AppCompatActivity {
 
                 final String uuid = UUID.randomUUID().toString().replace("-", "");
 
-                final Map<String, Object> map = new HashMap<>();
-                map.put("ServiceName", Service.getText().toString());
-                map.put("Price", price.getText().toString());
-                map.put("description", description.getText().toString());
-                map.put("productImage",url);
+                if (Service.getText().toString() != null && price.getText().toString() != null && description.getText().toString() != null && url != null) {
+
+                    final Map<String, Object> map = new HashMap<>();
+                    map.put("ServiceName", Service.getText().toString());
+                    map.put("Price", price.getText().toString());
+                    map.put("description", description.getText().toString());
+                    map.put("productImage", url);
 
 
-                final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                    final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
 
-                firestore.collection("users").document(fbuser.getUid()).update("Services." + uuid, map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    firestore.collection("users").document(fbuser.getUid()).update("Services." + uuid, map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 
-                        firestore.collection("users").document(fbuser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                String uuid1 = UUID.randomUUID().toString().replace("-", "");
-                                Map<String, Object> map2 = new HashMap<>();
-                                final Map<String, Object> map3 = new HashMap<>();
-                                Map<String, Object> map1 = new HashMap<>();
-                                map1.put("ServiceName", Service.getText().toString());
-                                map1.put("Price", price.getText().toString());
-                                map1.put("description", description.getText().toString());
-                                map1.put("productImage",url);
-                                map1.put("userService", fbuser.getUid());
-                                map2.put(uuid,map1);
-                                map3.put("Service",map2);
-
-
+                            firestore.collection("users").document(fbuser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    String uuid1 = UUID.randomUUID().toString().replace("-", "");
+                                    Map<String, Object> map2 = new HashMap<>();
+                                    final Map<String, Object> map3 = new HashMap<>();
+                                    Map<String, Object> map1 = new HashMap<>();
+                                    map1.put("ServiceName", Service.getText().toString());
+                                    map1.put("Price", price.getText().toString());
+                                    map1.put("description", description.getText().toString());
+                                    map1.put("productImage", url);
+                                    map1.put("userService", fbuser.getUid());
+                                    map2.put(uuid, map1);
+                                    map3.put("Service", map2);
 
 
+                                    final DocumentSnapshot snapshot = task.getResult();
+                                    firestore.collection((String) snapshot.get("Category")).document(fbuser.getUid()).update("Service." + uuid, map1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Intent intent = new Intent(AddingEvent.this, VendorAuth.class);
+                                            intent.putExtra("value", "1");
+                                            startActivity(intent);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.e("Adding Event", e.toString());
+                                            FirebaseFirestore firestorei = FirebaseFirestore.getInstance();
+                                            firestorei.collection((String) snapshot.get("Category")).document(fbuser.getUid()).set(map3).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Intent intent = new Intent(AddingEvent.this, VendorAuth.class);
+                                                    intent.putExtra("value", "1");
+                                                    startActivity(intent);
+                                                }
+                                            });
 
 
-                                final DocumentSnapshot snapshot = task.getResult();
-                                firestore.collection((String) snapshot.get("Category")).document(fbuser.getUid()).update("Service."+uuid,map1).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Intent intent = new Intent(AddingEvent.this, VendorAuth.class);
-                                        intent.putExtra("value", "1");
-                                        startActivity(intent);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.e("Adding Event",e.toString());
-                                        FirebaseFirestore firestorei=FirebaseFirestore.getInstance();
-                                        firestorei.collection((String) snapshot.get("Category")).document(fbuser.getUid()).set(map3).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Intent intent = new Intent(AddingEvent.this, VendorAuth.class);
-                                                intent.putExtra("value", "1");
-                                                startActivity(intent);
-                                            }
-                                        });
+                                        }
+                                    });
+
+                                }
+                            });
+                        }
+                    });
 
 
-                                    }
-                                });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Pls enter all the details", Toast.LENGTH_SHORT).show();
+                }
 
-                            }
-                        });
-                    }
-                });
-
-
-            }
-        });
+            }});
 
 
     }
