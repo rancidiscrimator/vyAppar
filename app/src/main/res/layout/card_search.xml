@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="5dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardElevation="0dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iw1"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/outline"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+
+                card_view:srcCompat="@drawable/piza"
+                tools:srcCompat="@drawable/piza" />
+
+            <TextView
+                android:id="@+id/twDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/oxygen"
+                android:inputType="textPersonName"
+                android:text="Tasty Homemade Malayam"
+                android:layout_marginLeft="14dp"
+                android:textColor="#94000000"
+                android:textSize="12sp"
+                card_view:layout_constraintStart_toEndOf="@+id/iw1"
+                card_view:layout_constraintTop_toBottomOf="@+id/tv1" />
+
+            <TextView
+                android:id="@+id/tvMisc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/oxygen"
+                android:text="Aalandur"
+                android:layout_marginLeft="14dp"
+                android:textColor="#94000000"
+                android:textSize="14sp"
+                card_view:layout_constraintBottom_toTopOf="@+id/ratingBar"
+                card_view:layout_constraintStart_toEndOf="@+id/iw1"
+                card_view:layout_constraintTop_toBottomOf="@+id/twDesc" />
+
+            <TextView
+                android:id="@+id/tvrating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:text="4/5"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/ratingBar" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/oxygen"
+                android:gravity="left"
+                android:inputType="textPersonName"
+                android:text="Malayalam Food"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="14dp"
+                card_view:layout_constraintStart_toEndOf="@+id/iw1"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnadd"
+                android:layout_width="50dp"
+                android:layout_height="37dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:srcCompat="@drawable/ic_baseline_add_circle_outline_24" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="80dp"
+                android:layout_height="13.49dp"
+                android:layout_marginLeft="14dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintStart_toEndOf="@+id/iw1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

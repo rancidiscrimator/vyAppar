@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddingEvent">
+
+
+   <ImageView
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:id="@+id/image"
+       android:layout_centerHorizontal="true"
+       android:layout_margin="20dp"
+       android:background="@color/colorPrimaryDark"
+       />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Service"
+        android:hint="NAME OF THE PRODUCT"
+        android:gravity="center"
+        android:layout_below="@id/image"
+        android:layout_margin="20dp"
+
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="PRICE"
+        android:gravity="center"
+        android:id="@+id/price"
+        android:layout_below="@id/Service"
+        android:layout_margin="20dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:gravity="center"
+        android:id="@+id/description"
+        android:layout_below="@id/price"
+        android:layout_margin="20dp"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+       android:id="@+id/floating"
+        android:layout_marginBottom="30dp"
+        >
+
+
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
+
+
+
+</RelativeLayout>
