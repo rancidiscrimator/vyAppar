@@ -326,7 +326,7 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
 
     @Override
     public void onBackPressed() {
-        
+
 
         if(cv.isClickable())
         {
