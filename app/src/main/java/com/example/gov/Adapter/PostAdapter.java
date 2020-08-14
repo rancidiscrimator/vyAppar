@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gov.ModalClasses.ChatContactModalClass;
 import com.example.gov.ModalClasses.PostModalClasses;
 import com.example.gov.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,7 +41,8 @@ import java.util.List;
         public void onBindViewHolder(@NonNull PostviewHolder holder, int position) {
             PostModalClasses classes = list.get(position);
             holder.tv1.setText(classes.getDescription());
-            
+            Picasso.with(mct).load(classes.getUrl()).into(holder.image);
+
 
 
 
