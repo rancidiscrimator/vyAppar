@@ -19,6 +19,7 @@ public class SettingActivity extends AppCompatActivity implements BottomNavigati
         setContentView(R.layout.activity_setting);
 
         navigationView=findViewById(R.id.bottomNavigation);
+        navigationView.setSelectedItemId(R.id.profilebottom);
 
         navigationView.setOnNavigationItemSelectedListener(this);
 

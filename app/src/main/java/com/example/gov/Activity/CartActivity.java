@@ -37,7 +37,9 @@ public class CartActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_cart);
         recyclerView=findViewById(R.id.recycler_View);
         bottomNavigationView=findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.cartbottom);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
 
         list1.add(contactModalClass);
         list1.add(contactModalClass1);

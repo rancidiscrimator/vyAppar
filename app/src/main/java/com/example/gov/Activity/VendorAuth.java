@@ -108,6 +108,7 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.homebottom);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 
@@ -299,11 +300,13 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
+
         switch (item.getItemId()) {
 
 
             case (R.id.searchbottom):
                 Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                item.setChecked(true);
 
                 startActivity(intent);
                 return true;
