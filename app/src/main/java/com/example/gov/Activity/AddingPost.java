@@ -68,7 +68,7 @@ public class AddingPost extends AppCompatActivity {
                         .compressLevel(ImagePicker.ComperesLevel.MEDIUM)
                         .directory(ImagePicker.Directory.DEFAULT)
                         .extension(ImagePicker.Extension.PNG)
-                        .scale(120, 120)
+                        .scale(400, 200)
                         .allowMultipleImages(false)
                         .enableDebuggingMode(true)
                         .build();
