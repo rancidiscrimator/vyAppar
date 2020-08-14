@@ -200,6 +200,7 @@ public class LoginScreen extends AppCompatActivity {
             tv2.setText("Enter Your Otp here");
             numberSent=false;
             signin.setText("CHECK OTP");
+            Toast.makeText(getApplicationContext(),"Enter the OTP ",Toast.LENGTH_SHORT).show();
 
 
 
