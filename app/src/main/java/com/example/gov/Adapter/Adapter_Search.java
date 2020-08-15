@@ -26,6 +26,7 @@ import com.example.gov.ModalClasses.Class_Cart;
 import com.example.gov.ModalClasses.Class_Search_Categories;
 import com.example.gov.R;
 import com.example.gov.RoomDatabase.AppDatabase;
+import com.example.gov.RoomDatabase.CartItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -128,16 +129,16 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
                 }
             });
 
-            btnadd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //AddToCart(itemView);
-                    activity.updatecart(cats.indexOf(itemView.getTag()));
-//                    AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart").build();
+//            btnadd.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    //AddToCart(itemView);
+//                    activity.updatecart(cats.indexOf(itemView.getTag()));
 //
-//                    db.cartDao().insertCartItem();
-                }
-            });
+//
+//
+//                }
+//            });
 
 
 
@@ -155,7 +156,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_Search.newViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adapter_Search.newViewHolder holder, final int position) {
 
         Class_Search_Categories categories= FULL_LIST.get(position);
 
@@ -168,6 +169,24 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
         holder.rating.setText(categories.getRating());
 
         Picasso.with(contextthis).load(categories.getIwDisp()).into(holder.iwdisp);
+
+        holder.btnadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart").allowMainThreadQueries().build();
+                Log.e("Adapter_search", String.valueOf(FULL_LIST.get(position)));
+                Class_Search_Categories categories=FULL_LIST.get(position);
+
+                CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getPrice(),"1",categories.getIwDisp(),categories.getUserId());
+                try{db.cartDao().insertCartItem(item);}
+                catch (Exception e)
+                {
+                    Log.e("Adapter Search",e.toString());
+                }
+
+                Log.e("Adapter_Search",db.cartDao().loadAllCartItem().get(0).getTitle());
+            }
+        });
 
 
 

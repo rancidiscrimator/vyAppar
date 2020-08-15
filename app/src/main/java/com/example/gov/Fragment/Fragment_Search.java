@@ -111,10 +111,10 @@ public class Fragment_Search extends Fragment {
 
                         for (Map.Entry<String, Object> entry1 : map.entrySet()) {
                             Map<String, Object> map2 = (Map<String, Object>) entry1.getValue();
-                            Log.e("Fragment_Serach", (String) entry1.getKey());
+                            Log.e("Fragment_Serach", map2.toString());
 
 
-                            Class_Search_Categories class_search_categories = new Class_Search_Categories(map2.get("ServiceName").toString(), map2.get("description").toString(), "Alandar", "4/5", map2.get("productImage").toString(),map2.get("userService").toString());
+                            Class_Search_Categories class_search_categories = new Class_Search_Categories(map2.get("ServiceName").toString(), map2.get("description").toString(), "Alandar", "4/5", map2.get("productImage").toString(),map2.get("userService").toString(),map2.get("Price").toString());
                             search_categories.add(class_search_categories);
                             adapter.notifyDataSetChanged();
 

@@ -4,6 +4,7 @@ public class Class_Search_Categories {
     private String Title,Desc,Misc,Rating;
     private String iwDisp;
     private String userId;
+    private  String price;
 
     public Class_Search_Categories(String title, String desc, String misc, String rating, String iwDisp) {
         this.Title = title;
@@ -11,6 +12,7 @@ public class Class_Search_Categories {
         this.Misc = misc;
         this.Rating = rating;
         this.iwDisp = iwDisp;
+
     }
 
     public Class_Search_Categories(String title, String desc, String misc, String rating, String iwDisp, String userId) {
@@ -20,6 +22,24 @@ public class Class_Search_Categories {
         Rating = rating;
         this.iwDisp = iwDisp;
         this.userId = userId;
+    }
+
+    public Class_Search_Categories(String title, String desc, String misc, String rating, String iwDisp, String userId, String price) {
+        Title = title;
+        Desc = desc;
+        Misc = misc;
+        Rating = rating;
+        this.iwDisp = iwDisp;
+        this.userId = userId;
+        this.price = price;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getUserId() {

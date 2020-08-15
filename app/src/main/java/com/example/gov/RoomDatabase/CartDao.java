@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 @Dao
 public interface CartDao {
 
@@ -19,7 +21,7 @@ public interface CartDao {
     public void changeQuantity(CartItem cartItem);
 
     @Query("SELECT * FROM cartItem")
-    public CartItem[] loadAllCartItem();
+    public List<CartItem> loadAllCartItem();
 
 
 }
