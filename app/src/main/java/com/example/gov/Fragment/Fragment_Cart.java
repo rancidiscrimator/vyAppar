@@ -15,11 +15,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.gov.Activity.APPLICATION_CLASS;
 import com.example.gov.Adapter.Adapter_Cart;
+import com.example.gov.ModalClasses.Class_Cart;
 import com.example.gov.R;
+import com.example.gov.RoomDatabase.AppDatabase;
+import com.example.gov.RoomDatabase.CartItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPrice {
     FragmentManager fragmentManager;
@@ -31,7 +38,8 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
     Adapter_Cart adapter;
     RecyclerView.LayoutManager layoutManager;
     TextView tp,tc;
-
+    List<CartItem> items;
+    List<Class_Cart> addItems;
 
     public Fragment_Cart() {
         //empty constructor
@@ -53,6 +61,7 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+       addItems=new ArrayList<>();
         view= inflater.inflate(R.layout.fragment_cart, container, false);
         fragmentManager=getActivity().getSupportFragmentManager();
         toolbar=view.findViewById(R.id.toolbar);
@@ -61,8 +70,9 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
         tc=view.findViewById(R.id.total);
         tp=view.findViewById(R.id.tvtotalprice);
         l1=view.findViewById(R.id.l1);
+        getValues();
         layoutManager=new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
-        adapter=new Adapter_Cart(getContext(), APPLICATION_CLASS.cart,this);
+        adapter=new Adapter_Cart(getContext(), addItems,this);
         l1.setLayoutManager(layoutManager);
         l1.setAdapter(adapter);
         checkNull();
@@ -93,6 +103,22 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
 
 
         return view;
+    }
+
+
+    public void getValues()
+    {
+        AppDatabase db= Room.databaseBuilder(getContext(),AppDatabase.class,"cart").allowMainThreadQueries().build();
+        items=db.cartDao().loadAllCartItem();
+
+        for(int i=0;i<items.size();i++)
+        {
+            CartItem cartItem=items.get(i);
+            Class_Cart cart=new Class_Cart(cartItem.getTitle(),cartItem.getDesc(),cartItem.getPrice(),cartItem.getQuantity(),cartItem.getIwl());
+            addItems.add(cart);
+        }
+
+
     }
 
 

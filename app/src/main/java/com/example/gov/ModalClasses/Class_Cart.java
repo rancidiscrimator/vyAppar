@@ -2,9 +2,9 @@ package com.example.gov.ModalClasses;
 
 public class Class_Cart {
     private String title,desc,price,quantity;
-    private int iwl;
+    private String iwl;
 
-    public Class_Cart(String title, String desc, String price, String quantity, int iwl) {
+    public Class_Cart(String title, String desc, String price, String quantity, String iwl) {
         this.title = title;
         this.desc = desc;
         this.price = price;
@@ -44,11 +44,11 @@ public class Class_Cart {
         this.quantity = quantity;
     }
 
-    public int getIwl() {
+    public String getIwl() {
         return iwl;
     }
 
-    public void setIwl(int iwl) {
+    public void setIwl(String iwl) {
         this.iwl = iwl;
     }
 }

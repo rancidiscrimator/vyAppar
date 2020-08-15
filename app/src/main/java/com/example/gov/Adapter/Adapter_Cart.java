@@ -14,14 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gov.ModalClasses.Class_Cart;
 import com.example.gov.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolder> {
 
-    private ArrayList<Class_Cart> carts=new ArrayList<>();
+    private List<Class_Cart> carts=new ArrayList<>();
     int height;
-    CountandPrice activity,fragment;
+    CountandPrice fragment;
+    Context context1;
 
 
     public interface CountandPrice
@@ -31,9 +34,9 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
     }
 
 
-    public Adapter_Cart(Context context, ArrayList<Class_Cart> list, CountandPrice reference){
+    public Adapter_Cart(Context context,List<Class_Cart> list, CountandPrice reference){
         carts = list;
-        activity=(CountandPrice)context;
+        context1=context;
         fragment=(CountandPrice) reference;
 
 
@@ -61,40 +64,40 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
             price=itemView.findViewById(R.id.price);
             quantity=itemView.findViewById(R.id.numberofitems);
 
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int i=carts.indexOf(itemView.getTag());
-                    carts.get(i).setQuantity((Integer.toString(Integer.parseInt(quantity.getText().toString())+1)));
-                    notifyDataSetChanged();
-                    fragment.getTotalCountandPrice(getCount(),getPrice());
+//            add.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    int i=carts.indexOf(itemView.getTag());
+//                    carts.get(i).setQuantity((Integer.toString(Integer.parseInt(quantity.getText().toString())+1)));
+//                    notifyDataSetChanged();
+//                    fragment.getTotalCountandPrice(getCount(),getPrice());
+//
+//
+//                }
+//            });
+//
+//            remove.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    int i=carts.indexOf(itemView.getTag());
+//                    if(Integer.parseInt(quantity.getText().toString())==1)
+//                    {
+//                        carts.remove(i);
+//                        notifyDataSetChanged();
+//                        fragment.getTotalCountandPrice(getCount(),getPrice());
+//
+//                    }
+//                    else {
+//                        carts.get(i).setQuantity((Integer.toString(Integer.parseInt(quantity.getText().toString()) - 1)));
+//                        notifyDataSetChanged();
+//                        fragment.getTotalCountandPrice(getCount(),getPrice());
+//
+//                    }
+//
+//                }
+//            });
 
-
-                }
-            });
-
-            remove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int i=carts.indexOf(itemView.getTag());
-                    if(Integer.parseInt(quantity.getText().toString())==1)
-                    {
-                        carts.remove(i);
-                        notifyDataSetChanged();
-                        fragment.getTotalCountandPrice(getCount(),getPrice());
-
-                    }
-                    else {
-                        carts.get(i).setQuantity((Integer.toString(Integer.parseInt(quantity.getText().toString()) - 1)));
-                        notifyDataSetChanged();
-                        fragment.getTotalCountandPrice(getCount(),getPrice());
-
-                    }
-
-                }
-            });
-
-            fragment.getTotalCountandPrice(getCount(),getPrice());
+            //fragment.getTotalCountandPrice(getCount(),getPrice());
 
 
         }
@@ -112,13 +115,15 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull final Adapter_Cart.newViewHolder holder, int position) {
+        Class_Cart cart=carts.get(position);
 
-        holder.itemView.setTag(carts.get(position));
-        holder.iwdisp.setImageResource(carts.get(position).getIwl());
-        holder.title.setText(carts.get(position).getTitle());
-        holder.desc.setText(carts.get(position).getDesc());
-        holder.price.setText(carts.get(position).getPrice());
-        holder.quantity.setText(carts.get(position).getQuantity());
+
+       // holder.iwdisp.setImageResource(carts.get(position).getIwl());
+        holder.title.setText(cart.getTitle());
+        holder.desc.setText(cart.getDesc());
+        holder.price.setText(cart.getPrice());
+        holder.quantity.setText(cart.getQuantity());
+        Picasso.with(context1).load(cart.getIwl()).into(holder.iwdisp);
 
 
         }
@@ -130,26 +135,26 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
         return carts.size();
     }
 
-    private String getCount(){
-     int totalcount=0;
-        for(Class_Cart temp:carts)
-        {
-            totalcount+=Integer.parseInt(temp.getQuantity().trim());
-
-        }
-        return Integer.toString(totalcount);
-    }
-    private String getPrice(){
-        int totalprice=0;
-        for(Class_Cart temp:carts)
-        {
-
-            int count=Integer.parseInt(temp.getQuantity().trim());
-            totalprice+=Integer.parseInt(temp.getPrice().trim().substring(3))*count;
-
-        }
-        return Integer.toString(totalprice);
-    }
+//    private String getCount(){
+//     int totalcount=0;
+//        for(Class_Cart temp:carts)
+//        {
+//            totalcount+=Integer.parseInt(temp.getQuantity().trim());
+//
+//        }
+//        return Integer.toString(totalcount);
+//    }
+//    private String getPrice(){
+//        int totalprice=0;
+//        for(Class_Cart temp:carts)
+//        {
+//
+//            int count=Integer.parseInt(temp.getQuantity().trim());
+//            totalprice+=Integer.parseInt(temp.getPrice().trim().substring(3))*count;
+//
+//        }
+//        return Integer.toString(totalprice);
+//    }
 
 
 }
