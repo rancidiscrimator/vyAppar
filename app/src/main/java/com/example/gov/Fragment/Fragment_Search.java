@@ -41,10 +41,8 @@ public class Fragment_Search extends Fragment {
     SearchView sw;
     FirebaseUser fbuser;
     FirebaseAuth auth;
-    Map<String, Object> document= new HashMap<>();
-    List<Class_Search_Categories> search_categories=new ArrayList<>();
-
-
+    Map<String, Object> document = new HashMap<>();
+    List<Class_Search_Categories> search_categories = new ArrayList<>();
 
 
     public Fragment_Search() {
@@ -56,18 +54,18 @@ public class Fragment_Search extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        auth=FirebaseAuth.getInstance();
-        fbuser=auth.getCurrentUser();
+        auth = FirebaseAuth.getInstance();
+        fbuser = auth.getCurrentUser();
 
-        l1=view.findViewById(R.id.l1);
+        l1 = view.findViewById(R.id.l1);
         l1.setHasFixedSize(true);
-        adapter=new Adapter_Search(this.getActivity(), search_categories);
-        linearLayoutManager=new LinearLayoutManager(this.getActivity(), RecyclerView.VERTICAL,false);
+        adapter = new Adapter_Search(this.getActivity(), search_categories);
+        linearLayoutManager = new LinearLayoutManager(this.getActivity(), RecyclerView.VERTICAL, false);
         l1.setAdapter(adapter);
         l1.setLayoutManager(linearLayoutManager);
         getData();
 
-        sw=(SearchView) view.findViewById(R.id.sw);
+        sw = (SearchView) view.findViewById(R.id.sw);
         sw.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -86,7 +84,7 @@ public class Fragment_Search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view= inflater.inflate(R.layout.fragment_search, container, false);
+        view = inflater.inflate(R.layout.fragment_search, container, false);
         setHasOptionsMenu(true);
 
         return view;
@@ -94,42 +92,36 @@ public class Fragment_Search extends Fragment {
 
     }
 
-    public void getData()
-    {
-        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+    public void getData() {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.collection("FOOD").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-int i=0;
-               List<DocumentSnapshot> snapshots= queryDocumentSnapshots.getDocuments();
-               for(DocumentSnapshot documentSnapshot: snapshots)
-               {
-                   document=documentSnapshot.getData();
+                int i = 0;
+                List<DocumentSnapshot> snapshots = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot documentSnapshot : snapshots) {
+                    document = documentSnapshot.getData();
 
-                   i++;
+                    i++;
 
-                   for (Map.Entry<String, Object> entry:document.entrySet())
-                   {
-                       Map<String, Object> map= (Map<String, Object>) entry.getValue();
-
-                       for (Map.Entry<String, Object> entry1:map.entrySet())
-                       {
-                           Map<String, Object> map2= (Map<String, Object>) entry1.getValue();
-                           Log.e("Fragment_Serach", (String) map2.get("ServiceName"));
-
-                           Class_Search_Categories class_search_categories=new Class_Search_Categories(map2.get("ServiceName").toString(),map2.get("description").toString(),"Alandar","4/5",map2.get("productImage").toString());
-                           search_categories.add(class_search_categories);
-                           adapter.notifyDataSetChanged();
+                    for (Map.Entry<String, Object> entry : document.entrySet()) {
+                        Map<String, Object> map = (Map<String, Object>) entry.getValue();
 
 
-                       }
-                   }
-               }
+                        for (Map.Entry<String, Object> entry1 : map.entrySet()) {
+                            Map<String, Object> map2 = (Map<String, Object>) entry1.getValue();
+                            Log.e("Fragment_Serach", (String) entry1.getKey());
 
 
+                            Class_Search_Categories class_search_categories = new Class_Search_Categories(map2.get("ServiceName").toString(), map2.get("description").toString(), "Alandar", "4/5", map2.get("productImage").toString(),map2.get("userService").toString());
+                            search_categories.add(class_search_categories);
+                            adapter.notifyDataSetChanged();
 
 
+                        }
+                    }
+                }
 
 
             }

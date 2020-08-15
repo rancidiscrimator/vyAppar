@@ -1,6 +1,7 @@
 package com.example.gov.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +15,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.gov.Activity.APPLICATION_CLASS;
+import com.example.gov.Activity.AddingPost;
+import com.example.gov.Activity.VendorAuth;
 import com.example.gov.ModalClasses.Class_Cart;
 import com.example.gov.ModalClasses.Class_Search_Categories;
 import com.example.gov.R;
+import com.example.gov.RoomDatabase.AppDatabase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewHolder> implements Filterable {
 
@@ -116,6 +133,9 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
                 public void onClick(View view) {
                     //AddToCart(itemView);
                     activity.updatecart(cats.indexOf(itemView.getTag()));
+//                    AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart").build();
+//
+//                    db.cartDao().insertCartItem();
                 }
             });
 
@@ -156,6 +176,18 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
     @Override
     public int getItemCount() {
         return cats.size();
+    }
+
+
+    public void addToCart()
+    {
+        FirebaseAuth auth=FirebaseAuth.getInstance();
+        final FirebaseUser fbuser=auth.getCurrentUser();
+        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+
+
+
+
     }
 
 
@@ -238,6 +270,10 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
             }
         }
     }
+
+
+
+
 
 //    private void AddToCart(View itemview){
 //        int i=cats.indexOf(itemview.getTag()),FLAG=0;
