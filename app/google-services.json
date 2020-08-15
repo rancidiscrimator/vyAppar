@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "144020601112-dqab8drnsnqd9vcaaqu31hdfd63n1utq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gov",
+            "certificate_hash": "f663a765085c7675bab4a322873be8b528c276c6"
+          }
+        },
+        {
           "client_id": "144020601112-3p7cjm6sgrrje3cvv1pg73p9k0sdbjvb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
