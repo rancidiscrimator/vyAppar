@@ -173,18 +173,18 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
         holder.btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart1").allowMainThreadQueries().build();
+                AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart2").allowMainThreadQueries().build();
                 Log.e("Adapter_search", String.valueOf(FULL_LIST.get(position)));
                 Class_Search_Categories categories=FULL_LIST.get(position);
 
-                CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getPrice(),"1",categories.getIwDisp(),categories.getUserId());
+                CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getPrice(),"1",categories.getIwDisp(),categories.getUserId(),categories.getUserId()+categories.getTitle());
                 try{db.cartDao().insertCartItem(item);}
                 catch (Exception e)
                 {
                     Log.e("Adapter Search",e.toString());
                 }
 
-                Log.e("Adapter_Search",db.cartDao().loadAllCartItem().get(0).getTitle());
+                
             }
         });
 

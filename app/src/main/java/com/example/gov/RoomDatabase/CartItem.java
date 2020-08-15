@@ -14,20 +14,28 @@ public class CartItem {
       public String price;
       public String quantity;
       @NonNull
-      @PrimaryKey(autoGenerate=true)
-      public int id;
+      @PrimaryKey
+      public String id;
       public String userId;
 
     @ColumnInfo(name = "imageUrl")
     public String iwl;
-    public CartItem(String title, String desc, String price, String quantity, String iwl,String userId) {
+    public CartItem(String title, String desc, String price, String quantity, String iwl,String userId,String id) {
         this.title = title;
         this.desc = desc;
         this.price = price;
         this.quantity = quantity;
-
+        this.id=id;
         this.iwl = iwl;
         this.userId=userId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserId() {

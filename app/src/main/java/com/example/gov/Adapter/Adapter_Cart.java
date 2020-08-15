@@ -64,38 +64,6 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
             price=itemView.findViewById(R.id.price);
             quantity=itemView.findViewById(R.id.numberofitems);
 
-//            add.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int i=carts.indexOf(itemView.getTag());
-//                    carts.get(i).setQuantity((Integer.toString(Integer.parseInt(quantity.getText().toString())+1)));
-//                    notifyDataSetChanged();
-//                    fragment.getTotalCountandPrice(getCount(),getPrice());
-//
-//
-//                }
-//            });
-//
-//            remove.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int i=carts.indexOf(itemView.getTag());
-//                    if(Integer.parseInt(quantity.getText().toString())==1)
-//                    {
-//                        carts.remove(i);
-//                        notifyDataSetChanged();
-//                        fragment.getTotalCountandPrice(getCount(),getPrice());
-//
-//                    }
-//                    else {
-//                        carts.get(i).setQuantity((Integer.toString(Integer.parseInt(quantity.getText().toString()) - 1)));
-//                        notifyDataSetChanged();
-//                        fragment.getTotalCountandPrice(getCount(),getPrice());
-//
-//                    }
-//
-//                }
-//            });
 
             //fragment.getTotalCountandPrice(getCount(),getPrice());
 
@@ -121,9 +89,18 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
        // holder.iwdisp.setImageResource(carts.get(position).getIwl());
         holder.title.setText(cart.getTitle());
         holder.desc.setText(cart.getDesc());
-        holder.price.setText(cart.getPrice());
+        holder.price.setText(String.valueOf(Integer.parseInt(cart.getPrice())*Integer.parseInt(cart.getQuantity())));
         holder.quantity.setText(cart.getQuantity());
         Picasso.with(context1).load(cart.getIwl()).into(holder.iwdisp);
+
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+            }
+        });
 
 
         }
