@@ -108,7 +108,7 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
 
     public void getValues()
     {
-        AppDatabase db= Room.databaseBuilder(getContext(),AppDatabase.class,"cart").allowMainThreadQueries().build();
+        AppDatabase db= Room.databaseBuilder(getContext(),AppDatabase.class,"cart1").allowMainThreadQueries().build();
         items=db.cartDao().loadAllCartItem();
 
         for(int i=0;i<items.size();i++)

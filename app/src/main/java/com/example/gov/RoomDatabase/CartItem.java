@@ -8,12 +8,14 @@ import androidx.room.PrimaryKey;
 public class CartItem {
 //    private String title,desc,price,quantity,userId;
 //    private String iwl;
+
       public String title;
       public String desc;
       public String price;
       public String quantity;
       @NonNull
-      @PrimaryKey
+      @PrimaryKey(autoGenerate=true)
+      public int id;
       public String userId;
 
     @ColumnInfo(name = "imageUrl")
