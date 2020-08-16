@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
     android:orientation="vertical"
     tools:context=".Activity.Activity_MAIN">
 
@@ -13,16 +15,25 @@
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/bottomnw"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/white"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_above="@id/bottomnw"
+        android:background="@drawable/shadow"
+        app:layout_constraintBottom_toBottomOf="@+id/main_frame" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnw"
+        style="@style/Widget.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/greybar"

@@ -4,31 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.LoginScreen">
+    tools:context=".Activity.LoginScreen"
+    android:backgroundTint="@color/colorPrimaryDark"
+    tools:ignore="ExtraText">
 
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pacifico"
+        android:fontFamily="@font/alfa_slab_one"
+        android:gravity="center_horizontal"
         android:text="Welcome!"
-        android:textColor="@color/violethighlight"
-        android:textSize="36sp"
+        android:textColor="@color/colorPrimaryDark1"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.314" />
 
     <TextView
         android:id="@+id/tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="ENTER YOUR PHONE NUMBER"
-        android:textSize="24sp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/oxygen"
+        android:text="PHONE NUMBER"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tvWelcome"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="@+id/tvWelcome"
         app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
 
@@ -38,38 +44,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:fontFamily="@font/oxygen"
         android:hint="Eg-9999999999"
-        android:inputType="textPassword"
+        android:inputType="number"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/tv2"
         app:layout_constraintStart_toStartOf="@+id/tv2"
         app:layout_constraintTop_toBottomOf="@+id/tv2" />
 
+
     <Button
         android:id="@+id/signin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-
-        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimaryDark1"
+        android:elevation="0.0dp"
+        android:fontFamily="@font/oxygen"
+        android:gravity="center"
         android:text="sign in "
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/tvForgotPass" />
-
-    <TextView
-        android:id="@+id/tvForgotPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Forgot Password?"
-        android:textColor="#A97AEA"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
@@ -78,11 +77,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:fontFamily="@font/oxygen"
         android:text="Don't have an account?"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/signin"
-        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="@+id/signin"
         app:layout_constraintTop_toBottomOf="@+id/signin" />
 
@@ -91,12 +91,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:fontFamily="@font/oxygen"
         android:text="Sign Up"
-        android:textColor="@color/violethighlight"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/signin"
-        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintHorizontal_bias="0.392"
         app:layout_constraintStart_toEndOf="@+id/tv3"
         app:layout_constraintTop_toBottomOf="@+id/signin" />
 

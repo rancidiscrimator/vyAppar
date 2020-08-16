@@ -7,29 +7,35 @@
     tools:context=".Activity.PhoneAuth">
 
 
-
-
     <EditText
+        android:id="@+id/otpt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/otpt"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+android:fontFamily="@font/oxygen"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="273dp"
+        android:layout_marginEnd="30dp"
         android:hint="Enter the OTP"
-        android:textSize="25sp"
-
-        android:layout_marginTop="100dp"
-        />
+        android:textSize="24sp" />
 
     <Button
+        android:id="@+id/check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/otpt"
-        android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"
-        android:text="send OTp"
-        android:id="@+id/check"
-        />
-
-
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:backgroundTint="@color/colorPrimaryDark1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="161dp"
+        android:text="Done" />
 
 
 </RelativeLayout>

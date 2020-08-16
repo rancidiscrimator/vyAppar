@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.VendorAuth">
+    tools:context=".Activity.VendorAuth"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linear"
+        android:background="@color/white"
         >
 <de.hdodenhof.circleimageview.CircleImageView
     android:layout_width="75dp"
@@ -29,18 +31,25 @@
             android:layout_marginTop="64dp"
             android:orientation="vertical"
             android:id="@+id/linear_layout"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="28dp"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="NAME"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="@font/oxygen"
+                android:layout_marginLeft="2dp"
                 android:id="@+id/name"
                 android:textSize="22sp"
                 />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="14dp"
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="80dp"
+                android:layout_height="13.49dp"
+
 
                 />
             <androidx.recyclerview.widget.RecyclerView
@@ -50,16 +59,19 @@
 
 
         </LinearLayout>
-        
+
         <TextView
-            android:layout_width="287dp"
+            android:layout_width="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linear_layout"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
+            android:textColor="@color/black"
+            android:layout_marginStart="8dp"
             android:id="@+id/description"
             android:gravity="center"
-            android:textSize="14dp"
+            android:fontFamily="@font/oxygen"
+            android:textSize="16sp"
             android:text="daslkdalmdlaksmdlkasmdlkksldmsakdm jkdjsdslakdjljsd ksjdlsakdjsajdals ksjdlaks"
 
             />
@@ -98,10 +110,8 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:layout_weight="1"
 
             />

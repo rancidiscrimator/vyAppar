@@ -39,6 +39,7 @@ public class viewpagerAdapter extends FragmentPagerAdapter {
         if(position==0)
         {
             title="List";
+
         }else
         {
             title="Social Media";

@@ -17,7 +17,7 @@
         android:layout_width="61dp"
         android:layout_height="61dp"
         card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="2dp"
+        card_view:cardElevation="0dp"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent">

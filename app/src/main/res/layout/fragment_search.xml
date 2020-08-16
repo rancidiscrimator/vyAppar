@@ -11,7 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,16 +28,15 @@
                 style="@style/SearchViewTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/whitebackground"
                 android:baselineAligned="true"
+                card_view:queryBackground="@color/colorTransparent"
                 card_view:defaultQueryHint="Search Items"
                 card_view:iconifiedByDefault="false"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                card_view:queryBackground="@drawable/whitebackground"
-                card_view:searchIcon="@drawable/ic_baseline_search_24" />
+                card_view:searchIcon="@drawable/ic_search" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
@@ -46,9 +47,7 @@
                 android:id="@+id/l1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginBottom="40dp">
 
             </androidx.recyclerview.widget.RecyclerView>

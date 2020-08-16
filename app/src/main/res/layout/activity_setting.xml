@@ -8,9 +8,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
+        style="Widget.BottomNavigationView"
         android:id="@+id/bottomNavigation"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         app:menu="@menu/menu_bottom_nav_bar"
         app:labelVisibilityMode="labeled"
         >

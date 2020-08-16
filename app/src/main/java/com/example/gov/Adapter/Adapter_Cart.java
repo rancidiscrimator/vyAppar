@@ -54,7 +54,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
             super(itemView);
 
             WindowManager.LayoutParams layoutParams=new WindowManager.LayoutParams();
-            layoutParams.height=height/4;
+            layoutParams.height=height/8;
             itemView.setLayoutParams(layoutParams);
             add=itemView.findViewById(R.id.add);
             remove=itemView.findViewById(R.id.subtract);

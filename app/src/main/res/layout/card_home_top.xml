@@ -18,6 +18,7 @@
         android:layout_width="194dp"
         android:layout_height="125dp"
         android:layout_marginTop="10dp"
+        card_view:cardElevation="0dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardBackgroundColor="#FF000000"
         card_view:layout_constraintBottom_toBottomOf="parent"

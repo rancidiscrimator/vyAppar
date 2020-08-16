@@ -11,24 +11,11 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
-                        <option name="children">
-                          <map>
-                            <entry key="clipartAsset">
-                              <value>
-                                <PersistentState>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="url" value="jar:file:/private/var/folders/n5/ynx19b8n0v3gz03twkr9b81c0000gn/T/AppTranslocation/69404696-EC3E-41A7-9C97-688C93F265D4/d/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialicons/search/baseline_search_24.xml" />
-                                    </map>
-                                  </option>
-                                </PersistentState>
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_search_24" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_e99b2707701312a6143b7e7bd759d34b" />
+                            <entry key="sourceFile" value="C:\Users\thiru\Downloads\e99b2707701312a6143b7e7bd759d34b.svg" />
                           </map>
                         </option>
                       </PersistentState>
