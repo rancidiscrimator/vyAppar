@@ -184,7 +184,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
                     Log.e("Adapter Search",e.toString());
                 }
 
-                
+
             }
         });
 
