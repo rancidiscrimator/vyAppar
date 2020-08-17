@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
@@ -22,6 +23,8 @@ import androidx.room.Room;
 import com.example.gov.Activity.APPLICATION_CLASS;
 import com.example.gov.Activity.AddingPost;
 import com.example.gov.Activity.VendorAuth;
+import com.example.gov.Activity.VendorProfileCustomerSide;
+import com.example.gov.Interface.OnItemClickListner;
 import com.example.gov.ModalClasses.Class_Cart;
 import com.example.gov.ModalClasses.Class_Search_Categories;
 import com.example.gov.R;
@@ -50,9 +53,14 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
     int height;
     SearchInterface activity;
     Context contextthis;
+    OnItemClickListner clickListner;
 
     public interface SearchInterface{
         void updatecart(int i);
+    }
+
+    public void setClickListener(OnItemClickListner itemClickListener) {
+        this.clickListner = itemClickListener;
     }
 
     public Adapter_Search(Context context, List<Class_Search_Categories> list){
@@ -102,7 +110,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
         }
     };
 
-    public class newViewHolder extends RecyclerView.ViewHolder {
+    public class newViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public ImageView iwdisp;
         public ImageButton btnadd;
@@ -122,12 +130,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
             rating=itemView.findViewById(R.id.tvrating);
             btnadd=itemView.findViewById(R.id.btnadd);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //CLICK TO SEND INTENT
-                }
-            });
+            itemView.setOnClickListener(this);
 
 //            btnadd.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -144,7 +147,15 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
 
         }
 
+        @Override
+        public void onClick(View view) {
+            clickListner.onClick(view,getPosition());
+
+
+        }
     }
+
+
 
 
     @NonNull
@@ -152,6 +163,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
     public Adapter_Search.newViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_search,parent,false);
         height=parent.getContext().getResources().getDisplayMetrics().heightPixels;
+
         return new newViewHolder(view);
     }
 
@@ -170,23 +182,23 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
 
         Picasso.with(contextthis).load(categories.getIwDisp()).into(holder.iwdisp);
 
-        holder.btnadd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart3").allowMainThreadQueries().build();
-                Log.e("Adapter_search", String.valueOf(FULL_LIST.get(position)));
-                Class_Search_Categories categories=FULL_LIST.get(position);
-
-                CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getPrice(),"1",categories.getIwDisp(),categories.getUserId(),categories.getUserId()+categories.getTitle());
-                try{db.cartDao().insertCartItem(item);}
-                catch (Exception e)
-                {
-                    Log.e("Adapter Search",e.toString());
-                }
-
-
-            }
-        });
+//        holder.btnadd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart3").allowMainThreadQueries().build();
+//                Log.e("Adapter_search", String.valueOf(FULL_LIST.get(position)));
+//                Class_Search_Categories categories=FULL_LIST.get(position);
+//
+//                CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getPrice(),"1",categories.getIwDisp(),categories.getUserId(),categories.getUserId()+categories.getTitle());
+//                try{db.cartDao().insertCartItem(item);}
+//                catch (Exception e)
+//                {
+//                    Log.e("Adapter Search",e.toString());
+//                }
+//
+//
+//            }
+//        });
 
 
 
@@ -198,16 +210,6 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
     }
 
 
-    public void addToCart()
-    {
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        final FirebaseUser fbuser=auth.getCurrentUser();
-        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
-
-
-
-
-    }
 
 
 
@@ -289,6 +291,9 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
             }
         }
     }
+
+
+
 
 
 

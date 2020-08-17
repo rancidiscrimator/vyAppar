@@ -1,5 +1,6 @@
 package com.example.gov.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gov.Activity.APPLICATION_CLASS;
+import com.example.gov.Activity.VendorProfileCustomerSide;
 import com.example.gov.Adapter.Adapter_Search;
 import com.example.gov.Adapter.ServiceAdapter;
+import com.example.gov.Interface.OnItemClickListner;
 import com.example.gov.ModalClasses.Class_Search_Categories;
 import com.example.gov.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,7 +35,7 @@ import java.util.Objects;
 
 import kotlin.jvm.internal.MagicApiIntrinsics;
 
-public class Fragment_Search extends Fragment {
+public class Fragment_Search extends Fragment implements OnItemClickListner {
 
     View view;
     Adapter_Search adapter;
@@ -42,6 +45,7 @@ public class Fragment_Search extends Fragment {
     FirebaseUser fbuser;
     FirebaseAuth auth;
     Map<String, Object> document = new HashMap<>();
+    List<String> vendorId=new ArrayList<>();
     List<Class_Search_Categories> search_categories = new ArrayList<>();
 
 
@@ -61,6 +65,8 @@ public class Fragment_Search extends Fragment {
         l1.setHasFixedSize(true);
         adapter = new Adapter_Search(this.getActivity(), search_categories);
         linearLayoutManager = new LinearLayoutManager(this.getActivity(), RecyclerView.VERTICAL, false);
+adapter.setClickListener(this);
+
         l1.setAdapter(adapter);
         l1.setLayoutManager(linearLayoutManager);
         getData();
@@ -106,6 +112,8 @@ public class Fragment_Search extends Fragment {
                     i++;
                     Class_Search_Categories class_search_categories = new Class_Search_Categories(document.get("companyName").toString(), document.get("description").toString(), "Alandar", "4/5", document.get("ImageUrl").toString(),document.get("Category").toString(),document.get("address").toString());
                     search_categories.add(class_search_categories);
+
+                    vendorId.add(document.get("userId").toString());
                     adapter.notifyDataSetChanged();
 
 
@@ -131,4 +139,12 @@ public class Fragment_Search extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View view, int position) {
+
+        Intent intent=new Intent(getContext(), VendorProfileCustomerSide.class);
+        intent.putExtra("userId",vendorId.get(position));
+        startActivity(intent);
+
+    }
 }

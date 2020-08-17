@@ -93,6 +93,7 @@ public class PhoneAuth extends AppCompatActivity {
         user2.put("address",user.getAddress());
         user2.put("email",user.getEmail());
         user2.put("type",user.getType());
+        user2.put("userId",user1.getUid());
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
         if(user.getType()==0)
         {
