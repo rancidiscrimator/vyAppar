@@ -93,11 +93,11 @@ public class AddingPost extends AppCompatActivity {
                     final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
 
-                    firestore.collection("users").document(fbuser.getUid()).update("Posts." + uuid, map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    firestore.collection("Vendor").document(fbuser.getUid()).update("Posts." + uuid, map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
-                            firestore.collection("users").document(fbuser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            firestore.collection("Vendor").document(fbuser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     String uuid1 = UUID.randomUUID().toString().replace("-", "");

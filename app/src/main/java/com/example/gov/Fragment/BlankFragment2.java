@@ -87,7 +87,7 @@ FirebaseUser fbuser;
     public void getdata(){
         FirebaseFirestore firestore=FirebaseFirestore.getInstance();
         DocumentReference reference
-                =firestore.collection("users").document(fbuser.getUid());
+                =firestore.collection("Vendor").document(fbuser.getUid());
         reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {

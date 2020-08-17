@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     fbuser=auth.getCurrentUser();
                     FirebaseFirestore firestore=FirebaseFirestore.getInstance();
-                    firestore.collection("users").document(fbuser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    firestore.collection("Vendor").document(fbuser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
 

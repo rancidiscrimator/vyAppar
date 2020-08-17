@@ -115,7 +115,7 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
         if (intent != null) {
             if (Integer.parseInt(intent.getStringExtra("value")) == 1) {
                 FirebaseFirestore firestore1 = FirebaseFirestore.getInstance();
-                firestore1.collection("users").document(user1.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                firestore1.collection("Vendor").document(user1.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
@@ -239,13 +239,20 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
         if (requestCode == ImagePicker.IMAGE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> mPaths = data.getStringArrayListExtra(ImagePicker.EXTRA_IMAGE_PATH);
             Uri file = Uri.fromFile(new File(mPaths.get(0)));
-            StorageReference reference = storageReference.child("Images/" + user1.getUid() + ".jpg");
+            final StorageReference reference = storageReference.child("Images/" + user1.getUid() + ".jpg");
             reference.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-                    firestore.collection("users").document(user1.getUid()).update("ImageUrl", downloadUrl.toString());
+                    final Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                    final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            firestore.collection("Vendor").document(user1.getUid()).update("ImageUrl", uri.toString());
+                            Log.e("Vendor_Auth",uri.toString());
+                        }
+                    });
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -269,9 +276,9 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
         user2.put("description", description.getText());
         user2.put("services", service);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("users").document(user1.getUid()).update("companyName", name.getText());
-        firebaseFirestore.collection("users").document(user1.getUid()).update("description", description.getText());
-        firebaseFirestore.collection("users").document(user1.getUid()).update("Category", service);
+        firebaseFirestore.collection("Vendor").document(user1.getUid()).update("companyName", name.getText());
+        firebaseFirestore.collection("Vendor").document(user1.getUid()).update("description", description.getText());
+        firebaseFirestore.collection("Vendor").document(user1.getUid()).update("Category", service);
 
 
     }

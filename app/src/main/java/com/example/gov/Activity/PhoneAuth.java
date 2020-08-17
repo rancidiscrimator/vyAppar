@@ -41,6 +41,7 @@ public class PhoneAuth extends AppCompatActivity {
     String codeSent;
     Intent intent;
     Intent intent1;
+    String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,15 @@ public class PhoneAuth extends AppCompatActivity {
         user2.put("email",user.getEmail());
         user2.put("type",user.getType());
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("users").document(user1.getUid()).set(user2).addOnSuccessListener(new OnSuccessListener<Void>() {
+        if(user.getType()==0)
+        {
+            value="Customer";
+        }else
+        {
+            value="Vendor";
+        }
+
+        firebaseFirestore.collection(value).document(user1.getUid()).set(user2).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 

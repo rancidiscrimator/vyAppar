@@ -94,7 +94,7 @@ public class Fragment_Search extends Fragment {
 
     public void getData() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        firestore.collection("FOOD").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firestore.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
@@ -104,23 +104,24 @@ public class Fragment_Search extends Fragment {
                     document = documentSnapshot.getData();
 
                     i++;
-
-                    for (Map.Entry<String, Object> entry : document.entrySet()) {
-                        Map<String, Object> map = (Map<String, Object>) entry.getValue();
-
-
-                        for (Map.Entry<String, Object> entry1 : map.entrySet()) {
-                            Map<String, Object> map2 = (Map<String, Object>) entry1.getValue();
-                            Log.e("Fragment_Serach", map2.toString());
+                    Class_Search_Categories class_search_categories = new Class_Search_Categories(document.get("companyName").toString(), document.get("description").toString(), "Alandar", "4/5", document.get("ImageUrl").toString(),document.get("Category").toString(),document.get("address").toString());
+                    search_categories.add(class_search_categories);
+                    adapter.notifyDataSetChanged();
 
 
-                            Class_Search_Categories class_search_categories = new Class_Search_Categories(map2.get("ServiceName").toString(), map2.get("description").toString(), "Alandar", "4/5", map2.get("productImage").toString(),map2.get("userService").toString(),map2.get("Price").toString());
-                            search_categories.add(class_search_categories);
-                            adapter.notifyDataSetChanged();
-
-
-                        }
-                    }
+//                    for (Map.Entry<String, Object> entry : document.entrySet()) {
+//                        Map<String, Objects> map = (Map<String, Objects>) entry.getValue();
+//
+//                        Log.e("Fragment_Serach2345", entry.getKey().toString()+"="+entry.getValue().toString());
+//
+//
+//
+//
+////                        Class_Search_Categories class_search_categories = new Class_Search_Categories(map.get("companyName").toString(), map.get("description").toString(), "Alandar", "4/5", map.get("ImageUrl").toString(),map.get("Category").toString(),map.get("address").toString());
+////
+////                        adapter.notifyDataSetChanged();
+//
+//                    }
                 }
 
 
