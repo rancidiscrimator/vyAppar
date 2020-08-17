@@ -10,7 +10,10 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d5ec371-3df4-4773-af93-60934d4359ee" name="Default Changelist" comment="" />
+    <list default="true" id="4d5ec371-3df4-4773-af93-60934d4359ee" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gov/Activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gov/Activity/MainActivity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,11 +101,15 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.example.gov.Activity" />
-    </key>
     <key name="android.template.-1805824391">
       <recent name="com.example.gov" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/menu" />
+      <recent name="$PROJECT_DIR$/app/src/main/res" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
     </key>
     <key name="android.template.-615997708">
       <recent name="com.example.gov" />
@@ -120,12 +127,8 @@
     <key name="android.template.-1247538281">
       <recent name="com.example.gov" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/values" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/menu" />
-      <recent name="$PROJECT_DIR$/app/src/main/res" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.gov.Activity" />
     </key>
     <key name="android.template.-1207441140">
       <recent name="com.example.gov" />
@@ -333,10 +336,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="470" y="285" width="852" height="550" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1596634284144" />
-    <state x="561" y="245" width="670" height="727" key="search.everywhere.popup" timestamp="1597426832840">
+    <state x="561" y="245" width="670" height="727" key="search.everywhere.popup" timestamp="1597646914005">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="561" y="245" width="670" height="727" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1597426832840" />
+    <state x="561" y="245" width="670" height="727" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1597646914005" />
     <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.23.1792.1042@0.23.1792.1042" timestamp="1595248591493" />
   </component>
   <component name="XDebuggerManager">
