@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gov">
+    package="com.example.gov" >
 
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -34,8 +34,10 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activity.AddingPost"></activity>
+        android:theme="@style/AppTheme" >
+        <activity android:name=".Activity.VendorProfileCustomerSide" >
+        </activity>
+        <activity android:name=".Activity.AddingPost" />
         <activity android:name=".Activity.SettingActivity" />
         <activity android:name=".Activity.CartActivity" />
         <activity android:name=".Activity.SearchActivity" />
@@ -45,7 +47,7 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginScreen" />
         <activity android:name=".Activity.Activity_MAIN" />
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
