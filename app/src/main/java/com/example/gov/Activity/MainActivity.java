@@ -1,22 +1,29 @@
 package com.example.gov.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.gov.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseUser fbuser;
+    String value;
 
 
     @Override
@@ -37,26 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 if(auth.getCurrentUser()!=null)
                 {
                     fbuser=auth.getCurrentUser();
-                    FirebaseFirestore firestore=FirebaseFirestore.getInstance();
-                    firestore.collection("Vendor").document(fbuser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    check();
 
-                            Long a= (Long) documentSnapshot.get("type");
-                            if(a==0)
-                            {
-                                Intent intent=new Intent(MainActivity.this,Activity_MAIN.class);
-                                startActivity(intent);
-
-                            }else if(a==1){
-                                Intent intent=new Intent(MainActivity.this,VendorAuth.class);
-                                intent.putExtra("value","1");
-                                startActivity(intent);
-                            }
-
-
-                        }
-                    });
 
 
 
@@ -69,4 +58,106 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-}
+
+    public void check()
+    {
+        final FirebaseFirestore db=FirebaseFirestore.getInstance();
+        db.collection("Vendor").document(fbuser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()){
+                        value="Vendor";
+                        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                        firestore.collection(value).document(fbuser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                Long a= (Long) documentSnapshot.get("type");
+                                if(a==0)
+                                {
+                                    Intent intent=new Intent(MainActivity.this,Activity_MAIN.class);
+                                    startActivity(intent);
+
+                                }else if(a==1){
+                                    Intent intent=new Intent(MainActivity.this,VendorAuth.class);
+                                    intent.putExtra("value","1");
+                                    startActivity(intent);
+                                }
+
+
+                            }
+                        });
+                    }else
+                    {
+
+
+                        db.collection("Customer").document(fbuser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists())
+                                    {
+                                        value="Customer";
+                                        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                                        firestore.collection(value).document(fbuser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                Long a= (Long) documentSnapshot.get("type");
+                                                if(a==0)
+                                                {
+                                                    Intent intent=new Intent(MainActivity.this,Activity_MAIN.class);
+                                                    startActivity(intent);
+
+                                                }else if(a==1){
+                                                    Intent intent=new Intent(MainActivity.this,VendorAuth.class);
+                                                    intent.putExtra("value","1");
+                                                    startActivity(intent);
+                                                }
+
+
+                                            }
+                                        });
+                                    }
+
+
+
+
+
+                                }
+
+
+                            }
+                        });
+
+
+
+                    }
+                    }
+
+
+
+
+
+
+                
+
+
+
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+                        }
+                    }

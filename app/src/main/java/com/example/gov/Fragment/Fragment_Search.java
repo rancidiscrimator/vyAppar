@@ -94,7 +94,7 @@ public class Fragment_Search extends Fragment {
 
     public void getData() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        firestore.collection("users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firestore.collection("Vendor").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
