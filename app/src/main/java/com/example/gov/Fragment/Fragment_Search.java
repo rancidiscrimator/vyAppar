@@ -109,13 +109,16 @@ adapter.setClickListener(this);
                 for (DocumentSnapshot documentSnapshot : snapshots) {
                     document = documentSnapshot.getData();
 
-                    i++;
-                    Class_Search_Categories class_search_categories = new Class_Search_Categories(document.get("companyName").toString(), document.get("description").toString(), "Alandar", "4/5", document.get("ImageUrl").toString(),document.get("Category").toString(),document.get("address").toString());
-                    search_categories.add(class_search_categories);
+                    if(document.get("companyName").toString()!=null&&document.get("description").toString()!=null&&document.get("ImageUrl").toString()!=null&&document.get("Category").toString()!=null&&document.get("address").toString()!=null)
+                    {
 
-                    vendorId.add(document.get("userId").toString());
-                    adapter.notifyDataSetChanged();
+                        i++;
+                        Class_Search_Categories class_search_categories = new Class_Search_Categories(document.get("companyName").toString(), document.get("description").toString(), "Alandar", "4/5", document.get("ImageUrl").toString(), document.get("Category").toString(), document.get("address").toString());
+                        search_categories.add(class_search_categories);
 
+                        vendorId.add(document.get("userId").toString());
+                        adapter.notifyDataSetChanged();
+                    }
 
 //                    for (Map.Entry<String, Object> entry : document.entrySet()) {
 //                        Map<String, Objects> map = (Map<String, Objects>) entry.getValue();

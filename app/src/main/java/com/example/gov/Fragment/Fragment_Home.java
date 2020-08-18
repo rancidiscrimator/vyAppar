@@ -1,5 +1,6 @@
 package com.example.gov.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,10 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gov.Activity.APPLICATION_CLASS;
+import com.example.gov.Activity.MapsActivity;
 import com.example.gov.Adapter.Adapter_Home_Bottom;
 import com.example.gov.Adapter.Adapter_Home_Top;
 import com.example.gov.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Fragment_Home extends Fragment {
 
@@ -28,6 +31,7 @@ public class Fragment_Home extends Fragment {
     RecyclerView.LayoutManager layoutManager2,layoutManager3,layoutManager1;
     View view;
     Toolbar toolbar;
+    FloatingActionButton floatingActionButton;
     BottomNavigationView bnw;
 
     public Fragment_Home() {
@@ -60,6 +64,16 @@ public class Fragment_Home extends Fragment {
         l2.setLayoutManager(layoutManager2);
         l3.setAdapter(adapter3);
         l3.setLayoutManager(layoutManager3);
+        floatingActionButton= view.findViewById(R.id.floating);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
 
         toolbar= view.findViewById(R.id.toolbarhome);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_location_on_24);

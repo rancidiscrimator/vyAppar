@@ -15,4 +15,5 @@
         <item>RENTAL</item>
         <item>HOUSE SERVICES</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>
