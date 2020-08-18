@@ -126,7 +126,7 @@ public class Adapter_Search2 extends RecyclerView.Adapter<Adapter_Search2.newVie
             rating=itemView.findViewById(R.id.tvrating);
             btnadd=itemView.findViewById(R.id.btnadd);
 
-           
+
 
 //            btnadd.setOnClickListener(new View.OnClickListener() {
 //                @Override
