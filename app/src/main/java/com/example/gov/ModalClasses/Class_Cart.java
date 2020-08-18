@@ -2,14 +2,33 @@ package com.example.gov.ModalClasses;
 
 public class Class_Cart {
     private String title,desc,price,quantity;
-    private String iwl;
+    private String iwl,userId,id;
 
-    public Class_Cart(String title, String desc, String price, String quantity, String iwl) {
+
+    public Class_Cart(String title, String desc, String price, String quantity, String iwl,String userId,String id) {
         this.title = title;
         this.desc = desc;
         this.price = price;
         this.quantity = quantity;
         this.iwl = iwl;
+        this.userId=userId;
+        this.id=id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -27,7 +27,7 @@ import com.example.gov.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Activity_MAIN extends AppCompatActivity implements Adapter_Home_Top.sendonitemclicktop, Adapter_Home_Bottom.sendonItemclickbottom, Adapter_Cart.CountandPrice, Adapter_Search.SearchInterface {
+public class Activity_MAIN extends AppCompatActivity implements Adapter_Home_Top.sendonitemclicktop, Adapter_Home_Bottom.sendonItemclickbottom, Adapter_Cart.CountandPrice {
 
     FragmentManager fragmentManager;
     BottomNavigationView bnw;
@@ -110,7 +110,5 @@ public class Activity_MAIN extends AppCompatActivity implements Adapter_Home_Top
 
     }
 
-    @Override
-    public void updatecart(int i) {
-    }
+
 }

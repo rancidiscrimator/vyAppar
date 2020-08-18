@@ -51,13 +51,11 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
     private List<Class_Search_Categories> cats=new ArrayList<>();
     private List<Class_Search_Categories> FULL_LIST=new ArrayList<>();
     int height;
-    SearchInterface activity;
+
     Context contextthis;
     OnItemClickListner clickListner;
 
-    public interface SearchInterface{
-        void updatecart(int i);
-    }
+
 
     public void setClickListener(OnItemClickListner itemClickListener) {
         this.clickListner = itemClickListener;
@@ -66,7 +64,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
     public Adapter_Search(Context context, List<Class_Search_Categories> list){
         cats = list;
         FULL_LIST=list;
-        activity=(SearchInterface) context;
+
         contextthis=context;
     }
 
@@ -182,23 +180,28 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
 
         Picasso.with(contextthis).load(categories.getIwDisp()).into(holder.iwdisp);
 
-//        holder.btnadd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart3").allowMainThreadQueries().build();
-//                Log.e("Adapter_search", String.valueOf(FULL_LIST.get(position)));
-//                Class_Search_Categories categories=FULL_LIST.get(position);
-//
-//                CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getPrice(),"1",categories.getIwDisp(),categories.getUserId(),categories.getUserId()+categories.getTitle());
-//                try{db.cartDao().insertCartItem(item);}
-//                catch (Exception e)
-//                {
-//                    Log.e("Adapter Search",e.toString());
-//                }
-//
-//
-//            }
-//        });
+        holder.btnadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppDatabase db= Room.databaseBuilder(contextthis,AppDatabase.class,"cart5").allowMainThreadQueries().build();
+                Log.e("Adapter_search", String.valueOf(FULL_LIST.get(position)));
+                Class_Search_Categories categories=FULL_LIST.get(position);
+                Log.e("Adapter_search", categories.getPrice()+"");
+
+
+                CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getMisc(),"1",categories.getIwDisp(),categories.getUserId(),categories.getUserId()+categories.getTitle());
+                try{db.cartDao().insertCartItem(item);
+                Toast.makeText(contextthis,"Item added to cart",Toast.LENGTH_SHORT).show();
+
+                }
+                catch (Exception e)
+                {
+                    Log.e("Adapter Search",e.toString());
+                }
+
+
+            }
+        });
 
 
 
@@ -206,7 +209,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
 
     @Override
     public int getItemCount() {
-        return cats.size();
+        return FULL_LIST.size();
     }
 
 

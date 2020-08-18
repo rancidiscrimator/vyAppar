@@ -1,6 +1,7 @@
 package com.example.gov.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.gov.ModalClasses.Class_Cart;
 import com.example.gov.R;
+import com.example.gov.RoomDatabase.AppDatabase;
+import com.example.gov.RoomDatabase.CartItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -82,8 +86,8 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final Adapter_Cart.newViewHolder holder, int position) {
-        Class_Cart cart=carts.get(position);
+    public void onBindViewHolder(@NonNull final Adapter_Cart.newViewHolder holder, final int position) {
+        final Class_Cart cart=carts.get(position);
 
 
        // holder.iwdisp.setImageResource(carts.get(position).getIwl());
@@ -97,8 +101,42 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
             @Override
             public void onClick(View view) {
 
+                AppDatabase db= Room.databaseBuilder(context1,AppDatabase.class,"cart5").allowMainThreadQueries().build();
+                cart.setQuantity(""+(Integer.parseInt(cart.getQuantity())+1));
+                CartItem cartItem=new CartItem(cart.getTitle(), cart.getDesc(),cart.getPrice(),cart.getQuantity(),cart.getIwl(),cart.getUserId(),cart.getId());
+                db.cartDao().changeQuantity(cartItem);
+                holder.price.setText(String.valueOf(Integer.parseInt(cart.getPrice())*Integer.parseInt(cart.getQuantity())));
+                Log.e("Add Button",cart.getQuantity());
+                holder.quantity.setText(cart.getQuantity());
 
 
+
+
+
+            }
+        });
+
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppDatabase db= Room.databaseBuilder(context1,AppDatabase.class,"cart5").allowMainThreadQueries().build();
+                cart.setQuantity(""+(Integer.parseInt(cart.getQuantity())-1));
+                CartItem cartItem=new CartItem(cart.getTitle(), cart.getDesc(),cart.getPrice(),cart.getQuantity(),cart.getIwl(),cart.getUserId(),cart.getId());
+                if(Integer.parseInt(cart.getQuantity())>0)
+                {
+
+                db.cartDao().changeQuantity(cartItem);
+                    holder.price.setText(String.valueOf(Integer.parseInt(cart.getPrice())*Integer.parseInt(cart.getQuantity())));
+                    holder.quantity.setText(cart.getQuantity());
+                    Log.e("Add Button",cart.getQuantity());
+                }
+                else {
+                    db.cartDao().deleteUser(cartItem);
+                    Log.e("Add Button","Delete");
+                    carts.remove(position);
+                    notifyDataSetChanged();
+
+                }
             }
         });
 

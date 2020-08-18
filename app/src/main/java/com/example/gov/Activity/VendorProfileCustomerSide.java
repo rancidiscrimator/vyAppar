@@ -61,7 +61,7 @@ public class VendorProfileCustomerSide extends AppCompatActivity {
         setContentView(R.layout.activity_vendor_profile_customer_side);
         intent=getIntent();
         userId=intent.getStringExtra("userId");
-        Log.e("vendorProfileCustomerSide",userId);
+        Log.e("vendorProfileCustomerSi",userId);
 
 
 
@@ -70,4 +70,13 @@ public class VendorProfileCustomerSide extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+
+
+    public String getUserID()
+    {
+        return userId;
+    }
+
+
 }
