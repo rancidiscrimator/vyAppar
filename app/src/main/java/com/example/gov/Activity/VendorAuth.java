@@ -71,6 +71,7 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
     PickerDialog pickerDialog;
     CircleImageView saveImage;
     String service;
+    Button button1;
     String uri1;
     BottomNavigationView bottomNavigationView;
     Spinner spinner;
@@ -96,6 +97,8 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
         auth = FirebaseAuth.getInstance();
         user1 = auth.getCurrentUser();
         spinner = (Spinner) findViewById(R.id.spinner);
+
+        button1=findViewById(R.id.button);
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -171,6 +174,14 @@ public class VendorAuth extends AppCompatActivity implements OnPickerCloseListen
         tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
         linear = findViewById(R.id.linear);
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  =new Intent(VendorAuth.this,MapsActivity2.class);
+                startActivity(intent);
+            }
+        });
 
 
         saveImage = findViewById(R.id.saveImage);

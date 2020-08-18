@@ -112,6 +112,6 @@ public class Activity_MAIN extends AppCompatActivity implements Adapter_Home_Top
 
     @Override
     public void onBackPressed() {
-        
+
     }
 }

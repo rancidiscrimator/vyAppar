@@ -18,9 +18,12 @@ import com.example.gov.Activity.VendorProfileCustomerSide;
 import com.example.gov.Adapter.Adapter_Search;
 import com.example.gov.Adapter.ServiceAdapter;
 import com.example.gov.Interface.OnItemClickListner;
+import com.example.gov.ModalClasses.Class_Chips;
 import com.example.gov.ModalClasses.Class_Search_Categories;
 import com.example.gov.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -45,7 +48,10 @@ public class Fragment_Search extends Fragment implements OnItemClickListner {
     FirebaseUser fbuser;
     FirebaseAuth auth;
     Map<String, Object> document = new HashMap<>();
+    Chip chiprice,chipcat;
+    BottomSheetDialog dialogadd;
     List<String> vendorId=new ArrayList<>();
+
     List<Class_Search_Categories> search_categories = new ArrayList<>();
 
 
@@ -60,6 +66,10 @@ public class Fragment_Search extends Fragment implements OnItemClickListner {
 
         auth = FirebaseAuth.getInstance();
         fbuser = auth.getCurrentUser();
+        chipcat=view.findViewById(R.id.chipcat);
+        chiprice=view.findViewById(R.id.chipprice);
+        chipcat.setText(setCat());
+        chiprice.setText(setPrice());
 
         l1 = view.findViewById(R.id.l1);
         l1.setHasFixedSize(true);
@@ -150,4 +160,29 @@ adapter.setClickListener(this);
         startActivity(intent);
 
     }
+
+
+    private String setCat()
+    {
+        for(Class_Chips temp:APPLICATION_CLASS.CATEGORIES)
+        {
+            if(temp.getCurrent()==1)
+            {
+                return(temp.getItem());
+            }
+        }
+        return ("");
+    };
+
+    private String setPrice()
+    {
+        for(Class_Chips temp:APPLICATION_CLASS.PRICES)
+        {
+            if(temp.getCurrent()==1)
+            {
+                return(temp.getItem());
+            }
+        }
+        return ("");
+    };
 }

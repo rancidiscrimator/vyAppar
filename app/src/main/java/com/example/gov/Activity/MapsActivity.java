@@ -136,7 +136,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         };
 
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection("Location").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
+                int i = 0;
+                List<DocumentSnapshot> snapshots = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot documentSnapshot : snapshots) {
+                    document = documentSnapshot.getData();
+                    LatLng myLocation=new LatLng( Float.parseFloat(String.valueOf(document.get("Lattitude"))), Float.parseFloat(String.valueOf(document.get("Longitude"))));
+
+                    mMap.addMarker(new MarkerOptions().position(myLocation).title("new Marker"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation,10.0f));
+
+
+
+
+
+
+                }}});
 
         if (Build.VERSION.SDK_INT < 23) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
