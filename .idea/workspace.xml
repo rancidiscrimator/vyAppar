@@ -24,8 +24,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gov/Fragment/Fragment_Settings_Preference.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gov/Fragment/Fragment_Settings_Preference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/shared_preferences.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/shared_preferences.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gov/Activity/SettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gov/Activity/SettingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,10 +87,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="navigationResourceFile" />
-        <option value="resourceFile" />
         <option value="layoutResourceFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -272,10 +272,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="484" y="322" key="AndroidCreateResourceDirectoryDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1596383841440" />
-    <state x="484" y="322" key="AndroidCreateResourceFileDialog" timestamp="1597405425002">
+    <state x="484" y="322" key="AndroidCreateResourceFileDialog" timestamp="1597753283398">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="484" y="322" key="AndroidCreateResourceFileDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1597405425002" />
+    <state x="484" y="322" key="AndroidCreateResourceFileDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1597753283398" />
     <state width="1750" height="275" key="GridCell.Tab.0.bottom" timestamp="1597752045261">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -349,10 +349,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="460" y="303" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1792.1120@0.0.1792.1120" timestamp="1596199270848" />
-    <state x="470" y="285" width="852" height="550" key="find.popup" timestamp="1596634284144">
+    <state x="470" y="285" width="852" height="550" key="find.popup" timestamp="1597753220146">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="470" y="285" width="852" height="550" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1596634284144" />
+    <state x="470" y="285" width="852" height="550" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1597753220146" />
     <state x="561" y="245" width="670" height="727" key="search.everywhere.popup" timestamp="1597646914005">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
