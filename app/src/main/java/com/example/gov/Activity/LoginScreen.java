@@ -1,8 +1,10 @@
 package com.example.gov.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +41,7 @@ public class LoginScreen extends AppCompatActivity {
     TextView tv2;
     Boolean numberSent=true;
     FirebaseAuth auth;
+    String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,24 +104,14 @@ public class LoginScreen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(),"User Signed IN",Toast.LENGTH_LONG).show();
-                            FirebaseUser user = task.getResult().getUser();
+                            final FirebaseUser user = task.getResult().getUser();
 
                             FirebaseFirestore firestore=FirebaseFirestore.getInstance();
                             firestore.collection("users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                                    Long a= (Long) documentSnapshot.get("type");
-                                    if(a==0)
-                                    {
-                                        Intent intent=new Intent(LoginScreen.this,Activity_MAIN.class);
-                                        startActivity(intent);
-
-                                    }else if(a==1){
-                                        Intent intent=new Intent(LoginScreen.this,VendorAuth.class);
-                                        intent.putExtra("value","1");
-                                        startActivity(intent);
-                                    }
+                                  check(user);
 
 
                                 }
@@ -132,6 +125,156 @@ public class LoginScreen extends AppCompatActivity {
                         }
                     }
                 });}
+
+
+
+    public void check(final FirebaseUser user)
+    {
+        final FirebaseFirestore db=FirebaseFirestore.getInstance();
+        db.collection("Vendor").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()){
+                        value="Vendor";
+
+                        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                        firestore.collection(value).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                Long a= (Long) documentSnapshot.get("type");
+                                db.collection("Customer").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists())
+                                            {
+                                                value="Customer";
+                                                FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                                                firestore.collection(value).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                        AlertDialog.Builder builder= new AlertDialog.Builder(LoginScreen.this)
+                                                                .setTitle("Where would you like to go")
+                                                                .setMessage("Please select where you want to head")
+                                                                .setPositiveButton("Vendor", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                                                        Intent intent=new Intent(LoginScreen.this,VendorAuth.class);
+                                                                        intent.putExtra("value","1");
+                                                                        startActivity(intent);
+
+                                                                    }
+                                                                }).setNegativeButton("Customer", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                                        Intent intent=new Intent(LoginScreen.this,Activity_MAIN.class);
+                                                                        startActivity(intent);
+
+                                                                    }
+                                                                });
+                                                        AlertDialog dialog=builder.create();
+                                                        dialog.show();
+
+
+                                                    }
+                                                });
+                                            }else
+                                            {
+                                                Intent intent=new Intent(LoginScreen.this,VendorAuth.class);
+                                                intent.putExtra("value","1");
+                                                startActivity(intent);
+                                            }
+
+
+
+
+
+                                        }
+
+
+                                    }
+                                });
+
+                            }
+                        });
+                    }else
+                    {
+
+
+                        db.collection("Customer").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists())
+                                    {
+                                        value="Customer";
+                                        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                                        firestore.collection(value).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                                Long a= (Long) documentSnapshot.get("type");
+                                                if(a==0)
+                                                {
+                                                    Intent intent=new Intent(LoginScreen.this,Activity_MAIN.class);
+                                                    startActivity(intent);
+
+                                                }else if(a==1){
+                                                    Intent intent=new Intent(LoginScreen.this,VendorAuth.class);
+                                                    intent.putExtra("value","1");
+                                                    startActivity(intent);
+                                                }
+
+
+                                            }
+                                        });
+                                    }
+
+
+
+
+
+                                }
+
+
+                            }
+                        });
+
+
+
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+    }
 
     public void verifyPhoneNumber(String number)
     {
