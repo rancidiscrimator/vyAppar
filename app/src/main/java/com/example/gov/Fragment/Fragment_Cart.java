@@ -1,6 +1,8 @@
 package com.example.gov.Fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,19 +77,36 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
         adapter=new Adapter_Cart(getContext(), addItems,this);
         l1.setLayoutManager(layoutManager);
         l1.setAdapter(adapter);
+
         checkNull();
 
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(tc.getText().toString().equals("")||tc.getText().toString().equals("0 items"))
+                if(addItems.size()==0)
                 {
                     Toast.makeText(getContext(),"Please select atleast one item!",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,new Fragment_Payment()).commit();
+                    int totalprice=0;
+
+                    for(int i=0;i<addItems.size();i++)
+                    {
+                        totalprice=totalprice+Integer.parseInt(addItems.get(i).getQuantity())*Integer.parseInt(addItems.get(i).getPrice());
+                    }
+                    Log.e("Fragment_cart",totalprice+"");
+                    Bundle bundle=new Bundle();
+                    bundle.putString("totalPrice",totalprice+"");
+
+                    ArrayList<Class_Cart> list= (ArrayList<Class_Cart>) addItems;
+                    bundle.putParcelableArrayList("cart_item_list",
+                            (ArrayList<? extends Parcelable>) list);
+                   Fragment_Payment payment= new Fragment_Payment();
+                   payment.setArguments(bundle);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,payment).commit();
+
                 }
             }
         });
@@ -106,6 +125,13 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
     }
 
 
+
+
+
+
+
+
+
     public void getValues()
     {
         AppDatabase db= Room.databaseBuilder(getContext(),AppDatabase.class,"cart5").allowMainThreadQueries().build();
@@ -116,10 +142,14 @@ public class Fragment_Cart extends Fragment implements Adapter_Cart.CountandPric
             CartItem cartItem=items.get(i);
             Class_Cart cart=new Class_Cart(cartItem.getTitle(),cartItem.getDesc(),cartItem.getPrice(),cartItem.getQuantity(),cartItem.getIwl(),cartItem.getUserId(),cartItem.getId());
             addItems.add(cart);
+
         }
 
 
     }
+
+
+
 
 
     @Override

@@ -1,8 +1,12 @@
 package com.example.gov.ModalClasses;
 
-public class Class_Cart {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Class_Cart implements Parcelable {
     private String title,desc,price,quantity;
     private String iwl,userId,id;
+
 
 
     public Class_Cart(String title, String desc, String price, String quantity, String iwl,String userId,String id) {
@@ -13,6 +17,51 @@ public class Class_Cart {
         this.iwl = iwl;
         this.userId=userId;
         this.id=id;
+    }
+    public Class_Cart(Parcel in)
+    {
+        super();
+
+    }
+    public static final Parcelable.Creator<Class_Cart> CREATOR = new Parcelable.Creator<Class_Cart>() {
+        public Class_Cart createFromParcel(Parcel in) {
+            return new Class_Cart(in);
+        }
+
+        public Class_Cart[] newArray(int size) {
+
+            return new Class_Cart[size];
+        }
+
+    };
+
+
+    public void readFromParcel(Parcel in) {
+        title = in.readString();
+        desc = in.readString();
+        price = in.readString();
+        quantity = in.readString();
+       iwl = in.readString();
+        userId = in.readString();
+       id = in.readString();
+
+
+
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+       dest.writeString(title);
+        dest.writeString(desc);
+        dest.writeString(price);
+        dest.writeString(quantity);
+        dest.writeString(iwl);
+        dest.writeString(userId);
+        dest.writeString(id);
+
     }
 
     public String getUserId() {

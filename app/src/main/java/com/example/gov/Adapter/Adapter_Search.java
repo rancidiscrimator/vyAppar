@@ -191,7 +191,7 @@ public class Adapter_Search extends RecyclerView.Adapter<Adapter_Search.newViewH
 
                 CartItem item=new CartItem(categories.getTitle(),categories.getDesc(),categories.getMisc(),"1",categories.getIwDisp(),categories.getUserId(),categories.getUserId()+categories.getTitle());
                 try{db.cartDao().insertCartItem(item);
-                Toast.makeText(contextthis,"Item added to cart",Toast.LENGTH_SHORT).show();
+                Toast.makeText(contextthis,categories.getUserId(),Toast.LENGTH_SHORT).show();
 
                 }
                 catch (Exception e)

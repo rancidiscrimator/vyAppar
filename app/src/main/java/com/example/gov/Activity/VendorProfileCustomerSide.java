@@ -16,12 +16,16 @@ import android.widget.TextView;
 import com.example.gov.Adapter.viewPageAdapter2;
 import com.example.gov.Adapter.viewpagerAdapter;
 import com.example.gov.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 import com.robertlevonyan.components.picker.PickerDialog;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,7 +44,7 @@ public class VendorProfileCustomerSide extends AppCompatActivity {
     TabLayout tabLayout;
     PickerDialog pickerDialog;
     CircleImageView saveImage;
-    String userId;
+    public String userId;
     String uri1;
     BottomNavigationView bottomNavigationView;
     Intent intent;
@@ -61,7 +65,9 @@ public class VendorProfileCustomerSide extends AppCompatActivity {
         setContentView(R.layout.activity_vendor_profile_customer_side);
         intent=getIntent();
         userId=intent.getStringExtra("userId");
+
         Log.e("vendorProfileCustomerSi",userId);
+
 
 
 
@@ -69,6 +75,34 @@ public class VendorProfileCustomerSide extends AppCompatActivity {
         viewPager.setAdapter(new viewPageAdapter2(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
         tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+        name=findViewById(R.id.name);
+        description=findViewById(R.id.description);
+        saveImage=findViewById(R.id.saveImage);
+        getData();
+
+
+
+
+
+    }
+
+
+
+
+    private void getData()
+    {
+        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+        firestore.collection("Vendor").document(userId.trim()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+               name.setText(documentSnapshot.get("companyName").toString());
+               description.setText(documentSnapshot.get("description").toString());
+                Picasso.with(getApplicationContext()).load(documentSnapshot.get("ImageUrl").toString()).into(saveImage);
+
+
+
+            }
+        });
     }
 
 

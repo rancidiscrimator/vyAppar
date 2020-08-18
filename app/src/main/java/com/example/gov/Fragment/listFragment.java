@@ -94,7 +94,7 @@ public class listFragment extends Fragment {
                                 Map<String, Object> UserDocument2= (Map<String, Object>) details3.getValue();
                                 Log.e("BlankFragmen",UserDocument2.get("Price").toString());
 
-                                Class_Search_Categories categories=new Class_Search_Categories(UserDocument2.get("ServiceName").toString(),UserDocument2.get("description").toString(),UserDocument2.get("Price").toString(),"4/5",UserDocument2.get("productImage").toString());
+                                Class_Search_Categories categories=new Class_Search_Categories(UserDocument2.get("ServiceName").toString(),UserDocument2.get("description").toString(),UserDocument2.get("Price").toString(),"4/5",UserDocument2.get("productImage").toString(),customerSide.getUserID());
                                         list.add(categories);
                                         search.notifyDataSetChanged();
 

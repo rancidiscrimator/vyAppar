@@ -129,6 +129,8 @@ public class AddingEvent extends AppCompatActivity {
                                             firestorei.collection((String) snapshot.get("Category")).document(fbuser.getUid()).set(map3).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
+
+
                                                     Intent intent = new Intent(AddingEvent.this, VendorAuth.class);
                                                     intent.putExtra("value", "1");
                                                     startActivity(intent);

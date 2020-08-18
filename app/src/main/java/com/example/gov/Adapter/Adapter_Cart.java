@@ -29,6 +29,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
     int height;
     CountandPrice fragment;
     Context context1;
+    int i=0;
 
 
     public interface CountandPrice
@@ -95,6 +96,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
         holder.desc.setText(cart.getDesc());
         holder.price.setText(String.valueOf(Integer.parseInt(cart.getPrice())*Integer.parseInt(cart.getQuantity())));
         holder.quantity.setText(cart.getQuantity());
+
         Picasso.with(context1).load(cart.getIwl()).into(holder.iwdisp);
 
         holder.add.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +110,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
                 holder.price.setText(String.valueOf(Integer.parseInt(cart.getPrice())*Integer.parseInt(cart.getQuantity())));
                 Log.e("Add Button",cart.getQuantity());
                 holder.quantity.setText(cart.getQuantity());
+                i++;
 
 
 
@@ -128,7 +131,7 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
                 db.cartDao().changeQuantity(cartItem);
                     holder.price.setText(String.valueOf(Integer.parseInt(cart.getPrice())*Integer.parseInt(cart.getQuantity())));
                     holder.quantity.setText(cart.getQuantity());
-                    Log.e("Add Button",cart.getQuantity());
+                    Log.e("Add Button",cart.getQuantity());i--;
                 }
                 else {
                     db.cartDao().deleteUser(cartItem);
@@ -142,6 +145,9 @@ public class Adapter_Cart extends RecyclerView.Adapter<Adapter_Cart.newViewHolde
 
 
         }
+
+
+
 
 
 
