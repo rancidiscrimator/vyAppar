@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.gov.Activity.VendorProfileCustomerSide;
 import com.example.gov.Adapter.Adapter_Search;
+import com.example.gov.Adapter.Adapter_Search2;
 import com.example.gov.ModalClasses.Class_Search_Categories;
 import com.example.gov.ModalClasses.ServiceModalClasses;
 import com.example.gov.R;
@@ -29,7 +30,7 @@ import java.util.Map;
 
 public class listFragment extends Fragment {
     RecyclerView recyclerView;
-    Adapter_Search search;
+    Adapter_Search2 search;
     List<Class_Search_Categories> list;
     VendorProfileCustomerSide customerSide;
 
@@ -62,7 +63,7 @@ public class listFragment extends Fragment {
         Log.e("BlankFragmen","jess");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        search=new Adapter_Search(getContext(),list);
+        search=new Adapter_Search2(getContext(),list);
         recyclerView.setAdapter(search);
 
 
