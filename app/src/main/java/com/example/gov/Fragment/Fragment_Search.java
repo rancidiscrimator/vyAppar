@@ -1,11 +1,13 @@
 package com.example.gov.Fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gov.Activity.APPLICATION_CLASS;
 import com.example.gov.Activity.VendorProfileCustomerSide;
+import com.example.gov.Adapter.Adapter_Chips;
 import com.example.gov.Adapter.Adapter_Search;
 import com.example.gov.Adapter.ServiceAdapter;
 import com.example.gov.Interface.OnItemClickListner;
@@ -43,7 +46,7 @@ public class Fragment_Search extends Fragment implements OnItemClickListner {
     View view;
     Adapter_Search adapter;
     LinearLayoutManager linearLayoutManager;
-    RecyclerView l1;
+    RecyclerView l1,l2;
     SearchView sw;
     FirebaseUser fbuser;
     FirebaseAuth auth;
@@ -51,6 +54,7 @@ public class Fragment_Search extends Fragment implements OnItemClickListner {
     Chip chiprice,chipcat;
     BottomSheetDialog dialogadd;
     List<String> vendorId=new ArrayList<>();
+    TextView head;
 
     List<Class_Search_Categories> search_categories = new ArrayList<>();
 
@@ -95,6 +99,60 @@ adapter.setClickListener(this);
             }
         });
 
+
+
+        chipcat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialogadd=new BottomSheetDialog(getContext());
+                dialogadd.setContentView(R.layout.dialog_search_chip);
+                dialogadd.setCanceledOnTouchOutside(true);
+                head=dialogadd.findViewById(R.id.head);
+                head.setText("SELECT CATEGORY");
+                l2=dialogadd.findViewById(R.id.choose);
+                RecyclerView.LayoutManager templ=new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+                RecyclerView.Adapter tempadapt= new Adapter_Chips(getContext(),APPLICATION_CLASS.CATEGORIES);
+                l2.setLayoutManager(templ);
+                l2.setAdapter(tempadapt);
+                dialogadd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        chipcat.setText(setCat());
+                        search_categories.clear();
+                        getData();
+
+                    }
+                });
+                dialogadd.show();
+            }
+        });
+
+        chiprice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialogadd=new BottomSheetDialog(getContext());
+                dialogadd.setContentView(R.layout.dialog_search_chip);
+                dialogadd.setCanceledOnTouchOutside(true);
+                head=dialogadd.findViewById(R.id.head);
+                head.setText("SORT BY PRICE");
+                l2=dialogadd.findViewById(R.id.choose);
+                RecyclerView.LayoutManager templ=new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+                RecyclerView.Adapter tempadapt= new Adapter_Chips(getContext(),APPLICATION_CLASS.PRICES);
+                l2.setLayoutManager(templ);
+                l2.setAdapter(tempadapt);
+                dialogadd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        chiprice
+                                .setText(setPrice());
+                    }
+                });
+                dialogadd.show();
+            }
+        });
+
     }
 
     @Override
@@ -121,14 +179,24 @@ adapter.setClickListener(this);
 
                     if(document.get("companyName").toString()!=null&&document.get("description").toString()!=null&&document.get("ImageUrl").toString()!=null&&document.get("Category").toString()!=null&&document.get("address").toString()!=null)
                     {
+                        Log.e("fragment_Search",chipcat.getText().toString().trim());
+                        Log.e("fragment_Search2",document.get("Category").toString().trim());
+                        if(document.get("Category").toString().trim().equals(chipcat.getText().toString().trim())){
+
 
                         i++;
                         Class_Search_Categories class_search_categories = new Class_Search_Categories(document.get("companyName").toString(), document.get("description").toString(), "Alandar", "4/5", document.get("ImageUrl").toString(), document.get("Category").toString(), document.get("address").toString());
                         search_categories.add(class_search_categories);
 
                         vendorId.add(document.get("userId").toString());
-                        adapter.notifyDataSetChanged();
+                            Log.e("fragment_Search3","yes");
+                        adapter.notifyDataSetChanged();}
+                        else
+                        {
+                            adapter.notifyDataSetChanged();
+                        }
                     }
+
 
 //                    for (Map.Entry<String, Object> entry : document.entrySet()) {
 //                        Map<String, Objects> map = (Map<String, Objects>) entry.getValue();

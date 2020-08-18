@@ -42,12 +42,16 @@ public class APPLICATION_CLASS extends Application {
         bottom.add(new Class_Home_Category("Mallu Joint", R.drawable.piza));
         bottom.add(new Class_Home_Category("Mallu Joint", R.drawable.piza));
         bottom.add(new Class_Home_Category("Mallu Joint", R.drawable.piza));
+        
         //CATEGORIES
         CATEGORIES.add(new Class_Chips("FOOD",1));
         CATEGORIES.add(new Class_Chips("FASHION",0));
         CATEGORIES.add(new Class_Chips("TUITION",0));
-        CATEGORIES.add(new Class_Chips("GROCERY",0));
+        CATEGORIES.add(new Class_Chips("GROCERIES",0));
         CATEGORIES.add(new Class_Chips("FREELANCE",0));
+        CATEGORIES.add(new Class_Chips("ART AND DECOR",0));
+        CATEGORIES.add(new Class_Chips("RENTAL",0));
+        CATEGORIES.add(new Class_Chips("HOUSE SERVICES",0));
 
         //PRICES
         PRICES.add(new Class_Chips("HIGH TO LOW",0));
