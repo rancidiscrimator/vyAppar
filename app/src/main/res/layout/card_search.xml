@@ -6,10 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -30,7 +28,7 @@
                 android:id="@+id/iw1"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:background="@drawable/outline"
+                android:layout_marginLeft="15dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
@@ -44,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="@font/oxygen"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:text="Tasty Homemade Malayam"
                 android:layout_marginLeft="14dp"
                 android:textColor="#94000000"
@@ -61,6 +59,7 @@
                 android:layout_marginLeft="14dp"
                 android:textColor="#94000000"
                 android:textSize="14sp"
+                android:inputType="textCapWords"
                 card_view:layout_constraintBottom_toTopOf="@+id/ratingBar"
                 card_view:layout_constraintStart_toEndOf="@+id/iw1"
                 card_view:layout_constraintTop_toBottomOf="@+id/twDesc" />
@@ -84,7 +83,7 @@
                 android:ems="10"
                 android:fontFamily="@font/oxygen"
                 android:gravity="left"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:text="Malayalam Food"
                 android:textColor="#000000"
                 android:textSize="18sp"
@@ -95,12 +94,16 @@
 
             <ImageButton
                 android:id="@+id/btnadd"
-                android:layout_width="50dp"
-                android:layout_height="37dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:srcCompat="@drawable/ic_baseline_add_circle_outline_24" />
+                card_view:layout_constraintHorizontal_bias="0.93"
+                card_view:layout_constraintStart_toEndOf="@+id/tvrating"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.86"
+                card_view:srcCompat="@drawable/ic_add_plus_svgrepo_com" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -110,6 +113,23 @@
                 android:layout_marginLeft="14dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toEndOf="@+id/iw1" />
+
+            <ImageView
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:src="@drawable/outline"
+                card_view:layout_constraintBottom_toBottomOf="@id/iw1"
+                card_view:layout_constraintStart_toStartOf="@+id/iw1"
+                card_view:layout_constraintTop_toTopOf="@+id/iw1"
+                card_view:layout_constraintEnd_toEndOf="@id/iw1"/>
+            <ImageView
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:src="@drawable/outline1"
+                card_view:layout_constraintBottom_toBottomOf="@id/iw1"
+                card_view:layout_constraintStart_toStartOf="@+id/iw1"
+                card_view:layout_constraintTop_toTopOf="@+id/iw1"
+                card_view:layout_constraintEnd_toEndOf="@id/iw1"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

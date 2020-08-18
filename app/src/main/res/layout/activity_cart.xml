@@ -31,9 +31,9 @@
             app:queryBackground="@drawable/whitebackground"
             app:searchIcon="@drawable/ic_baseline_search_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
-    
-    
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         android:id="@+id/bottomNavigation"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/menu_bottom_nav_bar"
+        app:menu="@menu/menu_vendor"
         app:labelVisibilityMode="labeled"
         >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
