@@ -42,7 +42,7 @@ public class APPLICATION_CLASS extends Application {
         bottom.add(new Class_Home_Category("Mallu Joint", R.drawable.piza));
         bottom.add(new Class_Home_Category("Mallu Joint", R.drawable.piza));
         bottom.add(new Class_Home_Category("Mallu Joint", R.drawable.piza));
-        
+
         //CATEGORIES
         CATEGORIES.add(new Class_Chips("FOOD",1));
         CATEGORIES.add(new Class_Chips("FASHION",0));
