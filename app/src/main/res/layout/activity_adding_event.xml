@@ -52,13 +52,13 @@
 
  <com.google.android.material.floatingactionbutton.FloatingActionButton
      android:id="@+id/floating"
-     android:src="@drawable/ic_baseline_add_circle_outline_24"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_below="@+id/description"
      android:layout_alignEnd="@+id/description"
-     android:layout_marginTop="50dp"
-     android:layout_marginEnd="4dp" >
+     android:layout_marginTop="52dp"
+     android:layout_marginEnd="42dp"
+     android:src="@drawable/ic_baseline_add_circle_outline_24">
 
 
  </com.google.android.material.floatingactionbutton.FloatingActionButton>

@@ -35,43 +35,30 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.Servicev
     StorageReference storageReference;
 
 
-    public ServiceAdapter(Context mct,List<ServiceModalClasses> list) {
+    public ServiceAdapter(Context mct, List<ServiceModalClasses> list) {
         this.mct = mct;
         this.list = list;
     }
 
     @Override
     public Serviceviewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(mct);
-        View view = inflater.inflate(R.layout.service,null);
+        LayoutInflater inflater = LayoutInflater.from(mct);
+        View view = inflater.inflate(R.layout.service, null);
         return new Serviceviewholder(view);
     }
 
     @Override
     public void onBindViewHolder(final Serviceviewholder holder, int position) {
-        final ServiceModalClasses classes=list.get(position);
+        final ServiceModalClasses classes = list.get(position);
         holder.tv1.setText(classes.getServiceName());
         holder.twDesc.setText(classes.getDescription());
         holder.tvMisc.setText(classes.getPrice());
 
-        storageReference= FirebaseStorage.getInstance().getReference();
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        FirebaseUser fbuser=auth.getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser fbuser = auth.getCurrentUser();
 
         Picasso.with(mct).load(classes.getUrl()).into(holder.iw1);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -81,33 +68,22 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.Servicev
         return list.size();
     }
 
-    public class Serviceviewholder extends RecyclerView.ViewHolder{
+    public class Serviceviewholder extends RecyclerView.ViewHolder {
 
-TextView tv1,twDesc,tvMisc;
-ImageView iw1;
-
-
-
+        TextView tv1, twDesc, tvMisc;
+        ImageView iw1;
 
 
         public Serviceviewholder(View itemView) {
             super(itemView);
 
-            tv1=itemView.findViewById(R.id.tv1);
-            twDesc=itemView.findViewById(R.id.twDesc);
-            tvMisc=itemView.findViewById(R.id.tvMisc);
-            iw1=itemView.findViewById(R.id.iw1);
-
-
-
-
-
-
-
+            tv1 = itemView.findViewById(R.id.tv1);
+            twDesc = itemView.findViewById(R.id.twDesc);
+            tvMisc = itemView.findViewById(R.id.tvMisc);
+            iw1 = itemView.findViewById(R.id.iw1);
 
 
         }
-
 
 
     }

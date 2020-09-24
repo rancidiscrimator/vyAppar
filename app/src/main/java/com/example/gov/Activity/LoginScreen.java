@@ -39,7 +39,7 @@ public class LoginScreen extends AppCompatActivity {
     EditText editTextPassword;
     String codeSent;
     TextView tv2;
-    Boolean numberSent=true;
+    Boolean numberSent = true;
     FirebaseAuth auth;
     String value;
 
@@ -47,27 +47,28 @@ public class LoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-        signin=findViewById(R.id.signin);
-        register=findViewById(R.id.register);
-        editTextPassword=findViewById(R.id.editTextPassword);
-        tv2=findViewById(R.id.tv2);
-        auth=FirebaseAuth.getInstance();
+        signin = findViewById(R.id.signin);
+        register = findViewById(R.id.register);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        tv2 = findViewById(R.id.tv2);
+        auth = FirebaseAuth.getInstance();
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(numberSent==true){
-                if(editTextPassword.getText().toString()==null)
-                {
-                    Toast.makeText(getApplicationContext(),"Enter Your PHone Number",Toast.LENGTH_LONG).show();
-                }else{
-                    verifyPhoneNumber(editTextPassword.getText().toString());
-                }}else{
-                    if (editTextPassword.getText().toString()==null)
-                        Toast.makeText(getApplicationContext(),"Enter Your PHone Number",Toast.LENGTH_LONG).show();
-                    else{
+                if (numberSent == true) {
+                    if (editTextPassword.getText().toString() == null) {
+                        Toast.makeText(getApplicationContext(), "Enter Your PHone Number", Toast.LENGTH_LONG).show();
+                    } else {
+                        verifyPhoneNumber(editTextPassword.getText().toString());
+                    }
+                } else {
+                    if (editTextPassword.getText().toString() == null)
+                        Toast.makeText(getApplicationContext(), "Enter Your PHone Number", Toast.LENGTH_LONG).show();
+                    else {
 
-                    verifySignIncode(codeSent,editTextPassword.getText().toString());}
+                        verifySignIncode(codeSent, editTextPassword.getText().toString());
+                    }
                 }
 
 
@@ -77,24 +78,20 @@ public class LoginScreen extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginScreen.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginScreen.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
 
 
-
-
     }
 
 
-    public void verifySignIncode(String verifyNUmber,String otp)
-    {
+    public void verifySignIncode(String verifyNUmber, String otp) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifyNUmber, otp);
         signInWithPhoneAuthCredential(credential);
 
     }
-
 
 
     private void signInWithPhoneAuthCredential(final PhoneAuthCredential credential) {
@@ -103,15 +100,15 @@ public class LoginScreen extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(),"User Signed IN",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "User Signed IN", Toast.LENGTH_LONG).show();
                             final FirebaseUser user = task.getResult().getUser();
 
-                            FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                            FirebaseFirestore firestore = FirebaseFirestore.getInstance();
                             firestore.collection("users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                                  check(user);
+                                    check(user);
 
 
                                 }
@@ -124,41 +121,39 @@ public class LoginScreen extends AppCompatActivity {
 
                         }
                     }
-                });}
+                });
+    }
 
 
-
-    public void check(final FirebaseUser user)
-    {
-        final FirebaseFirestore db=FirebaseFirestore.getInstance();
+    public void check(final FirebaseUser user) {
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Vendor").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    if (document.exists()){
-                        value="Vendor";
+                    if (document.exists()) {
+                        value = "Vendor";
 
-                        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
                         firestore.collection(value).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                                Long a= (Long) documentSnapshot.get("type");
+                                Long a = (Long) documentSnapshot.get("type");
                                 db.collection("Customer").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if(task.isSuccessful()) {
+                                        if (task.isSuccessful()) {
                                             DocumentSnapshot document = task.getResult();
-                                            if (document.exists())
-                                            {
-                                                value="Customer";
-                                                FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                                            if (document.exists()) {
+                                                value = "Customer";
+                                                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
                                                 firestore.collection(value).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                                                        AlertDialog.Builder builder= new AlertDialog.Builder(LoginScreen.this)
+                                                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginScreen.this)
                                                                 .setTitle("Where would you like to go")
                                                                 .setMessage("Please select where you want to head")
                                                                 .setPositiveButton("Vendor", new DialogInterface.OnClickListener() {
@@ -166,34 +161,30 @@ public class LoginScreen extends AppCompatActivity {
                                                                     public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                                                                        Intent intent=new Intent(LoginScreen.this,VendorAuth.class);
-                                                                        intent.putExtra("value","1");
+                                                                        Intent intent = new Intent(LoginScreen.this, VendorAuth.class);
+                                                                        intent.putExtra("value", "1");
                                                                         startActivity(intent);
 
                                                                     }
                                                                 }).setNegativeButton("Customer", new DialogInterface.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                                                        Intent intent=new Intent(LoginScreen.this,Activity_MAIN.class);
+                                                                        Intent intent = new Intent(LoginScreen.this, Activity_MAIN.class);
                                                                         startActivity(intent);
 
                                                                     }
                                                                 });
-                                                        AlertDialog dialog=builder.create();
+                                                        AlertDialog dialog = builder.create();
                                                         dialog.show();
 
 
                                                     }
                                                 });
-                                            }else
-                                            {
-                                                Intent intent=new Intent(LoginScreen.this,VendorAuth.class);
-                                                intent.putExtra("value","1");
+                                            } else {
+                                                Intent intent = new Intent(LoginScreen.this, VendorAuth.class);
+                                                intent.putExtra("value", "1");
                                                 startActivity(intent);
                                             }
-
-
-
 
 
                                         }
@@ -204,32 +195,29 @@ public class LoginScreen extends AppCompatActivity {
 
                             }
                         });
-                    }else
-                    {
+                    } else {
 
 
                         db.collection("Customer").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()) {
+                                if (task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
-                                    if (document.exists())
-                                    {
-                                        value="Customer";
-                                        FirebaseFirestore firestore=FirebaseFirestore.getInstance();
+                                    if (document.exists()) {
+                                        value = "Customer";
+                                        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
                                         firestore.collection(value).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                                                Long a= (Long) documentSnapshot.get("type");
-                                                if(a==0)
-                                                {
-                                                    Intent intent=new Intent(LoginScreen.this,Activity_MAIN.class);
+                                                Long a = (Long) documentSnapshot.get("type");
+                                                if (a == 0) {
+                                                    Intent intent = new Intent(LoginScreen.this, Activity_MAIN.class);
                                                     startActivity(intent);
 
-                                                }else if(a==1){
-                                                    Intent intent=new Intent(LoginScreen.this,VendorAuth.class);
-                                                    intent.putExtra("value","1");
+                                                } else if (a == 1) {
+                                                    Intent intent = new Intent(LoginScreen.this, VendorAuth.class);
+                                                    intent.putExtra("value", "1");
                                                     startActivity(intent);
                                                 }
 
@@ -239,9 +227,6 @@ public class LoginScreen extends AppCompatActivity {
                                     }
 
 
-
-
-
                                 }
 
 
@@ -249,46 +234,28 @@ public class LoginScreen extends AppCompatActivity {
                         });
 
 
-
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
 
 
             }
         });
 
 
-
-
-
-
-
     }
 
-    public void verifyPhoneNumber(String number)
-    {
+    public void verifyPhoneNumber(String number) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+"+"91"+number,        // Phone number to verify
+                "+" + "91" + number,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks);
-        Toast.makeText(getApplicationContext(),"phone",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "phone", Toast.LENGTH_LONG).show();
 
     }
 
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks  mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         @Override
         public void onVerificationCompleted(PhoneAuthCredential credential) {
@@ -299,11 +266,7 @@ public class LoginScreen extends AppCompatActivity {
             //     detect the incoming verification SMS and perform verification without
 
 
-
-
             //     user action.
-
-
 
 
         }
@@ -316,11 +279,11 @@ public class LoginScreen extends AppCompatActivity {
 
             if (e instanceof FirebaseAuthInvalidCredentialsException) {
                 // Invalid request]
-                Log.e("verify",e.getMessage());
+                Log.e("verify", e.getMessage());
                 // ...
             } else if (e instanceof FirebaseTooManyRequestsException) {
                 // The SMS quota for the project has been exceeded
-                Log.e("verify",e.getMessage());
+                Log.e("verify", e.getMessage());
                 // ...
             }
 
@@ -335,21 +298,15 @@ public class LoginScreen extends AppCompatActivity {
             // now need to ask the user to enter the code and then construct a credential
             // by combining the code with a verification ID.
             super.onCodeSent(verificationId, token);
-            Log.e("verify",verificationId);
-            codeSent=verificationId;
+            Log.e("verify", verificationId);
+            codeSent = verificationId;
 
             editTextPassword.setHint("Eg-12345");
             editTextPassword.setText("");
             tv2.setText("Enter Your Otp here");
-            numberSent=false;
+            numberSent = false;
             signin.setText("CHECK OTP");
-            Toast.makeText(getApplicationContext(),"Enter the OTP ",Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
+            Toast.makeText(getApplicationContext(), "Enter the OTP ", Toast.LENGTH_SHORT).show();
 
 
             // ...

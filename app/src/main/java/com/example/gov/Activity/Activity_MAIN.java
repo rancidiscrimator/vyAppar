@@ -48,6 +48,8 @@ public class Activity_MAIN extends AppCompatActivity implements Adapter_Home_Top
         bnw.setOnNavigationItemSelectedListener(navListener);
         preferences= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         preferences.edit().putBoolean("switch_preference_1",false).commit();
+        bnw.inflateMenu(R.menu.menu_bottom_nav_bar);
+
         APPLICATION_CLASS.NAME=preferences.getString("Name","Blank");
         APPLICATION_CLASS.ADDRESS=preferences.getString("address","Blank");
         Toast.makeText(Activity_MAIN.this,"Welcome Back "+APPLICATION_CLASS.NAME,Toast.LENGTH_SHORT).show();
